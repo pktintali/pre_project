@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pre_project/home.dart';
 import 'package:pre_project/catogery.dart';
+import 'package:pre_project/myDrawer.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -14,7 +15,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: tabsWidget(),
       appBar: tabsAppBar(),
-      drawer: Drawer(),
+      drawer: MyDrawer(),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: selectedTab,
         onTap: (tab) {
@@ -34,7 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget tabsWidget() {
     if (selectedTab == 0) {
-      return Text('Tab 0');
+      return Center(child: Text('Tab 0'));
     } else if (selectedTab == 1) {
       return Home();
     } else
@@ -56,6 +57,12 @@ class _MyHomePageState extends State<MyHomePage> {
       return AppBar(
         title: Text('Welcome'),
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.search),
+          ),
+        ],
       );
     }
   }

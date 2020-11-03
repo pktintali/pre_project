@@ -13,27 +13,6 @@ class _HomeState extends State<Home> {
         child: Container(
           child: Column(
             children: [
-              //  Padding(
-              //   padding: const EdgeInsets.all(3.0),
-              //   child: TextFormField(
-              //     decoration: InputDecoration(
-              //       suffixIcon: IconButton(
-              //         color: Colors.green,
-              //         icon: Icon(Icons.search),
-              //         onPressed: () {},
-              //       ),
-              //       border: OutlineInputBorder(
-              //         borderRadius: BorderRadius.all(
-              //           Radius.circular(100),
-              //         ),
-              //       ),
-              //       hintText: 'Search any product/shop...',
-              //     ),
-              //     autocorrect: true,
-              //     onChanged: (v) {},
-              //      decoration: TextDecoration(),
-              //   ),
-              // ),
               Card(
                 elevation: 2.0,
                 shadowColor: Colors.green,
@@ -45,20 +24,20 @@ class _HomeState extends State<Home> {
               ),
               productCard(
                 img:
-                    'https://images-na.ssl-images-amazon.com/images/I/61yXL70-RaL._SX679_.jpg',
+                    'https://europatat.eu/wp-content/uploads/2016/10/shutterstock_234553048.png',
                 name: 'Best Quality Potato',
-                price: '₹199',
+                price: '₹30/Kg',
+              ),
+              productCard(
+                img: 'https://pngimg.com/uploads/tomato/tomato_PNG12590.png',
+                name: 'Fresh Tomato',
+                price: '₹50/Kg',
               ),
               productCard(
                 img:
-                    'https://navbharattimes.indiatimes.com/photo.cms?photoid=70153751',
-                name: 'Best Quality Tomato',
-                price: '₹139',
-              ),
-              productCard(
-                img: 'https://kj2bcdn.b-cdn.net/media/6766/muli.jpg',
-                name: 'Best Radish',
-                price: '₹101',
+                    'https://lh3.googleusercontent.com/proxy/gsjxnlvp-vzsfkwr4AiKX0uPIVKxv0AaHu1J1r0t0uL8MwngLyonsMGl7SM-FIG4vPQJwF-tytDXpuJHOyMfJbsQV1gYHa4Y1erEgqgiF_VKoHJn',
+                name: 'Onion',
+                price: '₹35/Kg',
               ),
               Card(
                 elevation: 2.0,
@@ -87,7 +66,8 @@ class _HomeState extends State<Home> {
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: Card(
-        elevation: 4.0,
+        elevation: 3.0,
+        //shadowColor: Colors.green,
         child: Padding(
           padding: const EdgeInsets.all(4.0),
           child: Column(
@@ -159,6 +139,9 @@ class _HomeState extends State<Home> {
                     ),
                   ],
                 ),
+              ),
+              SizedBox(
+                height: 5.0,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

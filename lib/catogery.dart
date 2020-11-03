@@ -13,33 +13,7 @@ class _CatogeryState extends State<Catogery> {
     return SafeArea(
       child: Column(
         children: [
-          Text('First Item'),
-          Expanded(
-            child: ListView.builder(
-              itemCount: items.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text('${items[index]}'),
-                );
-              },
-            ),
-          ),
-          Card(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text('Cate 2'),
-            ),
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: items.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text('${items[index]}'),
-                );
-              },
-            ),
-          ),
+          
         ],
       ),
     );
