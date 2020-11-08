@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pre_project/home.dart';
-import 'package:pre_project/catogery.dart';
+import 'package:pre_project/pradeep/home.dart';
 import 'package:pre_project/myDrawer.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -39,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
     } else if (selectedTab == 1) {
       return Home();
     } else
-      return Catogery();
+      return Center(child: Text('Tab 2'));
   }
 
   Widget tabsAppBar() {
