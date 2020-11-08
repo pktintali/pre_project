@@ -35,7 +35,7 @@ class _HomeState extends State<Home> {
               ),
               productCard(
                 img:
-                    'https://lh3.googleusercontent.com/proxy/gsjxnlvp-vzsfkwr4AiKX0uPIVKxv0AaHu1J1r0t0uL8MwngLyonsMGl7SM-FIG4vPQJwF-tytDXpuJHOyMfJbsQV1gYHa4Y1erEgqgiF_VKoHJn',
+                    'https://pngimg.com/uploads/onion/onion_PNG3823.png',
                 name: 'Onion',
                 price: '₹35/Kg',
               ),
