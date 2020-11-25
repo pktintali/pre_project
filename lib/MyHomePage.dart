@@ -3,6 +3,7 @@ import 'package:pre_project/pradeep/home.dart';
 import 'package:pre_project/myDrawer.dart';
 
 class MyHomePage extends StatefulWidget {
+  static const id = "MyHomePage";
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -33,36 +34,46 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget tabsWidget() {
-    if (selectedTab == 0) {
-      return Center(child: Text('Tab 0'));
-    } else if (selectedTab == 1) {
-      return Home();
-    } else
-      return Center(child: Text('Tab 2'));
+    switch (selectedTab) {
+      case 0:
+        return Center(child: Text('Tab 0'));
+        break;
+
+      case 2:
+        return Center(child: Text('Tab 2'));
+        break;
+
+      default:
+        return Home();
+    }
   }
 
   Widget tabsAppBar() {
-    if (selectedTab == 0) {
-      return AppBar(
-        title: Text('Explore'),
-        centerTitle: true,
-      );
-    } else if (selectedTab == 2) {
-      return AppBar(
-        title: Text('Category'),
-        centerTitle: true,
-      );
-    } else {
-      return AppBar(
-        title: Text('Welcome'),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.search),
-          ),
-        ],
-      );
+    switch (selectedTab) {
+      case 0:
+        return AppBar(
+          title: Text('Explore'),
+          centerTitle: true,
+        );
+        break;
+
+      case 2:
+        return AppBar(
+          title: Text('Category'),
+          centerTitle: true,
+        );
+        break;
+      default:
+        return AppBar(
+          title: Text('Welcome'),
+          centerTitle: true,
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.search),
+            ),
+          ],
+        );
     }
   }
 }
