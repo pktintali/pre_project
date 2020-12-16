@@ -29,7 +29,7 @@ class UserProfile extends StatelessWidget {
                     foregroundColor: Colors.green,
                     radius: MediaQuery.of(context).size.height*0.09,
                     backgroundColor: Colors.yellow,
-                    backgroundImage: AssetImage("asstes/images/userimage.png"),
+                    backgroundImage: AssetImage("assets/images/userimage.png"),
                   ),
                   Padding(padding: EdgeInsets.symmetric(horizontal: 15.0),),
                   Container(
