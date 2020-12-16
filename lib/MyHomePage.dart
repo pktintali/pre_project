@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pre_project/pradeep/home.dart';
 import 'package:pre_project/myDrawer.dart';
+import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 
 class MyHomePage extends StatefulWidget {
   static const id = "MyHomePage";
@@ -9,26 +10,30 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int selectedTab = 1;
+  int selectedTab = 2;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFEDFDEC),
       body: tabsWidget(),
       appBar: tabsAppBar(),
       drawer: MyDrawer(),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: selectedTab,
+      bottomNavigationBar: ConvexAppBar(
+        items: [
+          TabItem(icon: Icons.add_location_rounded, title: 'Nearby'),
+          TabItem(icon: Icons.category, title: 'Category'),
+          TabItem(icon: Icons.home, title: 'Home'),
+          TabItem(icon: Icons.message, title: 'Help'),
+          TabItem(icon: Icons.account_circle_rounded, title: 'Profile'),
+        ],
+        color: Colors.white70,
+        backgroundColor: Colors.green,
+        initialActiveIndex: selectedTab,
         onTap: (tab) {
           setState(() {
             selectedTab = tab;
           });
         },
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.book), label: 'Explore'),
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.category), label: 'Category'),
-        ],
       ),
     );
   }
@@ -36,12 +41,16 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget tabsWidget() {
     switch (selectedTab) {
       case 0:
-        return Center(child: Text('Tab 0'));
-        break;
+        return Center(child: Text('Nearby Tab'));
 
-      case 2:
-        return Center(child: Text('Tab 2'));
-        break;
+      case 1:
+        return Center(child: Text('Category Tab'));
+
+      case 3:
+        return Center(child: Text('Help Tab'));
+
+      case 4:
+        return Center(child: Text('Profile Tab'));
 
       default:
         return Home();
@@ -52,17 +61,26 @@ class _MyHomePageState extends State<MyHomePage> {
     switch (selectedTab) {
       case 0:
         return AppBar(
-          title: Text('Explore'),
+          title: Text('Nearby'),
           centerTitle: true,
         );
-        break;
 
-      case 2:
+      case 1:
         return AppBar(
           title: Text('Category'),
           centerTitle: true,
         );
-        break;
+      case 3:
+        return AppBar(
+          title: Text('Help'),
+          centerTitle: true,
+        );
+
+      case 4:
+        return AppBar(
+          title: Text('Profile'),
+          centerTitle: true,
+        );
       default:
         return AppBar(
           title: Text('Welcome'),

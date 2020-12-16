@@ -5,6 +5,16 @@ class ProductDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 40),
+        child: IconButton(
+          onPressed: () {},
+          icon: Icon(
+            Icons.favorite_border,
+            color: Colors.red,
+          ),
+        ),
+      ),
       bottomSheet: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

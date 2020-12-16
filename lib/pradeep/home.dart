@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pre_project/pradeep/Constants.dart';
-import 'package:pre_project/pradeep/ProductDetails.dart';
+// import 'package:pre_project/pradeep/ProductDetails.dart';
 
 class Home extends StatefulWidget {
   static const id = "Home";
@@ -18,47 +18,18 @@ class _HomeState extends State<Home> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Featured Products',
-                  style: TextStyle(fontSize: 18),
-                ),
-              ),
-              productList(height: 150, width: 250, wide: true),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Recommended Products',
-                  style: TextStyle(fontSize: 18),
-                ),
-              ),
-              productList(height: 120, width: 120, wide: false),
-              productList(height: 120, width: 120, wide: false),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Popular in Your Area',
-                  style: TextStyle(fontSize: 18),
-                ),
-              ),
-              productList(height: 150, width: 250, wide: true),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'For You',
-                  style: TextStyle(fontSize: 18),
-                ),
-              ),
-              productList(height: 120, width: 120, wide: false),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Top in Vegetables',
-                  style: TextStyle(fontSize: 18),
-                ),
-              ),
-              productList(height: 120, width: 120, wide: false),
+              productCategoryList(height: 70, width: 60, wide: false),
+              Constants.categoryButton(category: 'Featured Products'),
+              productCard(),
+              Constants.categoryButton(category: 'Recommended Products'),
+              productCard(),
+              productCard(),
+              Constants.categoryButton(category: 'Popular in Your Area'),
+              productCard(),
+              Constants.categoryButton(category: 'For You'),
+              productCard(),
+              Constants.categoryButton(category: 'Top in Vegetables'),
+              productCard(),
             ],
           ),
         ),
@@ -66,7 +37,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget productList(
+  Widget productCategoryList(
       {@required double height, @required double width, bool wide}) {
     return SizedBox(
       height: height,
@@ -76,11 +47,23 @@ class _HomeState extends State<Home> {
         scrollDirection: Axis.horizontal,
         itemCount: 11,
         itemBuilder: (BuildContext context, int index) => Card(
-          color: Color(0xFFFFFCD1),
-          child: Container(
-            width: width,
-            child: Center(
-              child: items(wide: wide, product: Constants.products[index]),
+          // color: Color(0xFFFFFCD1),
+          child: GestureDetector(
+            onTap: () {},
+            child: Container(
+              width: width,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Icon(Constants.myIcons(index)),
+                  Text(
+                    'Category',
+                    style: TextStyle(
+                      fontSize: 9,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -88,76 +71,82 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget items({@required bool wide, List<String> product}) {
-    return wide ? wideCard(product: product) : miniCard(product: product);
-  }
-
-  Widget wideCard({@required List<String> product}) {
-    return RawMaterialButton(
-      onPressed: () {
-        Navigator.pushNamed(context, ProductDetails.id);
-      },
-      child: Row(
-        children: [
-          Expanded(
-            flex: 2,
-            child: Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: Container(
-                child: Image.network(
-                  product[0],
-                  fit: BoxFit.contain,
-                ),
-              ),
+  Widget productCard() {
+    return SizedBox(
+      height: 145,
+      child: ListView.builder(
+        physics: ClampingScrollPhysics(),
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        itemCount: 11,
+        itemBuilder: (BuildContext context, int index) => Card(
+          // color: Color(0xFFFFFCD1),
+          child: Container(
+            width: 130,
+            child: Center(
+              child: productCardItem(product: Constants.products[index]),
             ),
           ),
-          Container(
-            height: 120,
-            width: 1.2,
-            color: Colors.lightGreen,
-          ),
-          Expanded(
-            child: Container(
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      product[1],
-                    ),
-                    Text(
-                      product[2],
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
 
-  Widget miniCard({@required List<String> product}) {
+  Widget productCardItem({List<String> product}) {
     return RawMaterialButton(
       onPressed: () {},
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: Column(
         children: [
-          Column(
-            children: [
-              Container(
-                height: 110,
-                width: 118,
-                child: Image.network(
-                  product[0],
-                  fit: BoxFit.fitHeight,
-                ),
+          Container(
+            height: 85,
+            child: Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: Image.network(
+                product[0],
+                fit: BoxFit.contain,
               ),
-            ],
+            ),
+          ),
+          SizedBox(height: 6),
+          Center(child: Text(product[1])),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.green,
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(100),
+                    ),
+                  ),
+                  height: 18,
+                  width: 37,
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          '4.5',
+                          style: TextStyle(
+                            fontSize: 11,
+                            color: Colors.white,
+                          ),
+                        ),
+                        Icon(
+                          Icons.star,
+                          size: 12,
+                          color: Colors.white,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Text(product[2])
+              ],
+            ),
           ),
         ],
       ),
