@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pre_project/pradeep/home.dart';
 import 'package:pre_project/myDrawer.dart';
+import 'package:pre_project/vartul/explore/explore.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -26,8 +27,7 @@ class _MyHomePageState extends State<MyHomePage> {
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.book), label: 'Explore'),
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.category), label: 'Category'),
+          BottomNavigationBarItem(icon: Icon(Icons.category), label: 'Category'),
         ],
       ),
     );
@@ -35,7 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget tabsWidget() {
     if (selectedTab == 0) {
-      return Center(child: Text('Tab 0'));
+      return Explore();
     } else if (selectedTab == 1) {
       return Home();
     } else
