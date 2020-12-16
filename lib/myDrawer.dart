@@ -16,7 +16,7 @@ class _MyDrawerState extends State<MyDrawer> {
               gradient: LinearGradient(
                 colors: [Colors.green, Colors.yellow],
               ),
-              color: Colors.green,
+              //color: Colors.green,
             ),
             currentAccountPicture: CircleAvatar(
               backgroundColor: Colors.grey,
