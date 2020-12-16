@@ -43,17 +43,18 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget tabsAppBar() {
-    if (selectedTab == 0) {
-      return AppBar(
-        title: Text('Explore'),
-        centerTitle: true,
-      );
-    } else if (selectedTab == 2) {
+    // if (selectedTab == 0) {
+    //   return AppBar(
+    //     title: Text('Explore'),
+    //     centerTitle: true,
+    //   );
+    // } else
+    if (selectedTab == 2) {
       return AppBar(
         title: Text('Category'),
         centerTitle: true,
       );
-    } else {
+    } else if(selectedTab == 1){
       return AppBar(
         title: Text('Welcome'),
         centerTitle: true,
