@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 class MyDrawer extends StatefulWidget {
   @override
@@ -14,7 +15,7 @@ class _MyDrawerState extends State<MyDrawer> {
           UserAccountsDrawerHeader(
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [Colors.green, Colors.yellow],
+                //colors: [Colors.green, Colors.yellow],
               ),
               color: Colors.green,
             ),
