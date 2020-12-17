@@ -35,14 +35,6 @@ class _MyDrawerState extends State<MyDrawer> {
             onTap: () {},
           ),
           ListTile(
-            title: Text('My Purchases'),
-            leading: Icon(
-              Icons.money,
-              color: Colors.green,
-            ),
-            onTap: () {},
-          ),
-          ListTile(
             title: Text('Favorites'),
             leading: Icon(
               Icons.favorite,

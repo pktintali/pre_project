@@ -2,9 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 
-class BuildSearchBar{
+class BuildSearchBar {
   FloatingSearchBar buildFloatingSearchBar() {
     return FloatingSearchBar(
+      iconColor: Colors.green,
       hint: 'Search...',
       scrollPadding: const EdgeInsets.only(top: 16, bottom: 56),
       transitionDuration: const Duration(milliseconds: 800),
