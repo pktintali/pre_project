@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:pre_project/home.dart';
-import 'package:pre_project/catogery.dart';
+import 'package:pre_project/pradeep/home.dart';
 import 'package:pre_project/myDrawer.dart';
+import 'package:pre_project/vartul/explore/explore.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
+//commit 2
 
 class _MyHomePageState extends State<MyHomePage> {
   int selectedTab = 1;
@@ -26,8 +27,7 @@ class _MyHomePageState extends State<MyHomePage> {
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.book), label: 'Explore'),
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.category), label: 'Category'),
+          BottomNavigationBarItem(icon: Icon(Icons.category), label: 'Category'),
         ],
       ),
     );
@@ -35,25 +35,26 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget tabsWidget() {
     if (selectedTab == 0) {
-      return Center(child: Text('Tab 0'));
+      return Explore();
     } else if (selectedTab == 1) {
       return Home();
     } else
-      return Catogery();
+      return Center(child: Text('Tab 2'));
   }
 
   Widget tabsAppBar() {
-    if (selectedTab == 0) {
-      return AppBar(
-        title: Text('Explore'),
-        centerTitle: true,
-      );
-    } else if (selectedTab == 2) {
+    // if (selectedTab == 0) {
+    //   return AppBar(
+    //     title: Text('Explore'),
+    //     centerTitle: true,
+    //   );
+    // } else
+    if (selectedTab == 2) {
       return AppBar(
         title: Text('Category'),
         centerTitle: true,
       );
-    } else {
+    } else if(selectedTab == 1){
       return AppBar(
         title: Text('Welcome'),
         centerTitle: true,

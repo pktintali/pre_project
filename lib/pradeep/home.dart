@@ -4,7 +4,7 @@ class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
 }
-
+//comment
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
@@ -34,8 +34,7 @@ class _HomeState extends State<Home> {
                 price: '₹50/Kg',
               ),
               productCard(
-                img:
-                    'https://pngimg.com/uploads/onion/onion_PNG3823.png',
+                img: 'https://pngimg.com/uploads/onion/onion_PNG3823.png',
                 name: 'Onion',
                 price: '₹35/Kg',
               ),
