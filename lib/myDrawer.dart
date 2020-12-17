@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 class MyDrawer extends StatefulWidget {
   @override
@@ -16,7 +17,7 @@ class _MyDrawerState extends State<MyDrawer> {
               gradient: LinearGradient(
                 colors: [Colors.green, Colors.yellow],
               ),
-              //color: Colors.green,
+              color: Colors.green,
             ),
             currentAccountPicture: CircleAvatar(
               backgroundColor: Colors.grey,

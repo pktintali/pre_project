@@ -12,44 +12,170 @@ class BuildBottomModal {
         //  SizedBox(height: 12.0),
 
         //rating bar and rest of the text
-        Flexible(fit: FlexFit.loose, flex: 4, child: ratingBar()),
+        Flexible(fit: FlexFit.loose, flex: 4, child: ratingBar(context)),
 
         //required buttons
-        Flexible(fit: FlexFit.loose, flex: 2, child: buttons())
+        Flexible(fit: FlexFit.loose, flex: 2, child: buttons(context))
       ],
     );
   }
 
-  Container buttons() {
+  SingleChildScrollView shopImages() {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: [
+          Container(
+            height: 150,
+            child: Card(
+                child: Image(
+                  image: AssetImage('assets/images/shop1.png'),
+                  //  fit: BoxFit.fill,
+                )),
+          ),
+          Container(
+            height: 150,
+            child: Card(
+                child: Image(
+                  image: AssetImage('assets/images/shop2.png'),
+                  //  fit: BoxFit.fill,
+                )),
+          ),
+          Container(
+            height: 150,
+            child: Card(
+                child: Image(
+                  image: AssetImage('assets/images/shop3.png'),
+                  //  fit: BoxFit.fill,
+                )),
+          ),
+          Container(
+            height: 150,
+            child: Card(
+                child: Image(
+                  image: AssetImage('assets/images/shop4.png'),
+                  //  fit: BoxFit.fill,
+                )),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Container ratingBar(BuildContext context) {
+    return Container(
+      margin: new EdgeInsets.only(
+          top: MediaQuery.of(context).size.height * 0.01,
+          left: MediaQuery.of(context).size.height * 0.02,
+          bottom: MediaQuery.of(context).size.height * 0.02),
+      child: Column(
+        children: [
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'Store Name',
+              style: TextStyle(
+                  fontSize: MediaQuery.of(context).size.height * 0.05,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+          // SizedBox(height: 6.0),
+
+          Container(
+            height: MediaQuery.of(context).size.height * 0.06,
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: RatingBar.builder(
+                initialRating: 3,
+                itemCount: 5,
+                // ignore: missing_return
+                itemBuilder: (context, index) {
+                  switch (index) {
+                    case 0:
+                      return Icon(
+                        Icons.sentiment_very_dissatisfied,
+                        color: Colors.red,
+                      );
+                    case 1:
+                      return Icon(
+                        Icons.sentiment_dissatisfied,
+                        color: Colors.redAccent,
+                      );
+                    case 2:
+                      return Icon(
+                        Icons.sentiment_neutral,
+                        color: Colors.amber,
+                      );
+                    case 3:
+                      return Icon(
+                        Icons.sentiment_satisfied,
+                        color: Colors.lightGreen,
+                      );
+                    case 4:
+                      return Icon(
+                        Icons.sentiment_very_satisfied,
+                        color: Colors.green,
+                      );
+                  }
+                },
+                onRatingUpdate: (rating) {
+                  print(rating);
+                },
+              ),
+            ),
+          ),
+
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'Store Type',
+              style: TextStyle(
+                  fontSize: MediaQuery.of(context).size.height * 0.04,
+                  color: Colors.black),
+            ),
+          ),
+
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'Open Close Time',
+              style: TextStyle(
+                  fontSize: MediaQuery.of(context).size.height * 0.04,
+                  color: Colors.black),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Container buttons(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(4),
       child: Row(
+
         children: [
           Expanded(
-            flex: 8,
+            flex: 4,
             child: Container(
-              margin: EdgeInsets.all(1),
+              alignment: Alignment.bottomCenter,
+              height: MediaQuery.of(context).size.height * 0.07,
+              margin: EdgeInsets.all(MediaQuery.of(context).size.width*0.01),
               child: RaisedButton(
                 child: Row(
-                  mainAxisSize: MainAxisSize.min,
+                  //mainAxisSize: MainAxisSize.min,
                   children: [
-                    Flexible(
-                      flex: 1,
-                      child: Icon(
-                        Icons.directions,
-                        color: Colors.white,
-                      ),
+                    Icon(
+                      Icons.directions,
+                      color: Colors.white,
                     ),
                     SizedBox(
-                      width: 10,
+                      width: MediaQuery.of(context).size.width*0.01,
                     ),
-                    Flexible(
-                      flex: 3,
-                      child: Text(
-                        "Directions",
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
+                    Text(
+                      "Directions",
+                      style: TextStyle(
+                        color: Colors.white,
                       ),
                     ),
                   ],
@@ -58,26 +184,30 @@ class BuildBottomModal {
                   borderRadius: BorderRadius.circular(30),
                 ),
                 color: Colors.blue,
-                onPressed: () {},
+                onPressed: () {
+                  print('DIRECTION');
+                },
               ),
             ),
           ),
           Expanded(
-            flex: 6,
+            flex: 3,
             child: Container(
-              margin: EdgeInsets.all(1),
+              alignment: Alignment.bottomCenter,
+              height: MediaQuery.of(context).size.height * 0.07,
+              margin: EdgeInsets.all(MediaQuery.of(context).size.width*0.01),
               child: RaisedButton(
                 child: Row(
                   children: [
                     Icon(
-                      Icons.favorite_outline_sharp,
+                      Icons.call,
                       color: Colors.blue,
                     ),
                     SizedBox(
-                      width: 10,
+                      width: MediaQuery.of(context).size.width*0.0,
                     ),
                     Text(
-                      "Save",
+                      "Call",
                       style: TextStyle(
                         color: Colors.black45,
                       ),
@@ -88,14 +218,18 @@ class BuildBottomModal {
                   borderRadius: BorderRadius.circular(30),
                 ),
                 color: Colors.white,
-                onPressed: () {},
+                onPressed: () {
+                  print('SAVE');
+                },
               ),
             ),
           ),
           Expanded(
-            flex: 7,
+            flex: 3,
             child: Container(
-              margin: EdgeInsets.all(1),
+              alignment: Alignment.bottomCenter,
+              height: MediaQuery.of(context).size.height * 0.07,
+              margin: EdgeInsets.all(MediaQuery.of(context).size.width*0.01),
               child: RaisedButton(
                 child: Row(
                   children: [
@@ -104,7 +238,7 @@ class BuildBottomModal {
                       color: Colors.blue,
                     ),
                     SizedBox(
-                      width: 10,
+                      width: MediaQuery.of(context).size.width*0.01,
                     ),
                     Text(
                       "Share",
@@ -118,126 +252,11 @@ class BuildBottomModal {
                   borderRadius: BorderRadius.circular(30),
                 ),
                 color: Colors.white,
-                onPressed: () {},
+                onPressed: () {
+                  print('SHARE');
+                },
               ),
             ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Container ratingBar() {
-    return Container(
-      margin: new EdgeInsets.only(top: 20, left: 20),
-      child: Column(
-        children: [
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              'Store Name',
-              style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
-            ),
-          ),
-          // SizedBox(height: 6.0),
-
-          Align(
-            alignment: Alignment.centerLeft,
-            child: RatingBar.builder(
-              initialRating: 3,
-              itemCount: 5,
-              // ignore: missing_return
-              itemBuilder: (context, index) {
-                switch (index) {
-                  case 0:
-                    return Icon(
-                      Icons.sentiment_very_dissatisfied,
-                      color: Colors.red,
-                    );
-                  case 1:
-                    return Icon(
-                      Icons.sentiment_dissatisfied,
-                      color: Colors.redAccent,
-                    );
-                  case 2:
-                    return Icon(
-                      Icons.sentiment_neutral,
-                      color: Colors.amber,
-                    );
-                  case 3:
-                    return Icon(
-                      Icons.sentiment_satisfied,
-                      color: Colors.lightGreen,
-                    );
-                  case 4:
-                    return Icon(
-                      Icons.sentiment_very_satisfied,
-                      color: Colors.green,
-                    );
-                }
-              },
-              onRatingUpdate: (rating) {
-                print(rating);
-              },
-            ),
-          ),
-
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              'General Store',
-              style: TextStyle(fontSize: 20.0, color: Colors.black),
-            ),
-          ),
-
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              'Open Close Time',
-              style: TextStyle(fontSize: 20.0, color: Colors.black),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  SingleChildScrollView shopImages() {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: [
-          Container(
-            height: 150,
-            child: Card(
-                child: Image(
-              image: AssetImage('assets/shop1.png'),
-              //  fit: BoxFit.fill,
-            )),
-          ),
-          Container(
-            height: 150,
-            child: Card(
-                child: Image(
-              image: AssetImage('assets/shop2.png'),
-              //  fit: BoxFit.fill,
-            )),
-          ),
-          Container(
-            height: 150,
-            child: Card(
-                child: Image(
-              image: AssetImage('assets/shop3.png'),
-              //  fit: BoxFit.fill,
-            )),
-          ),
-          Container(
-            height: 150,
-            child: Card(
-                child: Image(
-              image: AssetImage('assets/shop4.png'),
-              //  fit: BoxFit.fill,
-            )),
           ),
         ],
       ),

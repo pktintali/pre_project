@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:pre_project/pradeep/home.dart';
 import 'package:pre_project/myDrawer.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+import 'package:pre_project/sarthak/user_profile.dart';
 import 'package:pre_project/vartul/explore/explore.dart';
 
-class MyHomePage extends StatefulWidget {
+class MainHomePage extends StatefulWidget {
   static const id = "MyHomePage";
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MainHomePageState createState() => _MainHomePageState();
 }
 //commit 2
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MainHomePageState extends State<MainHomePage> {
   int selectedTab = 2;
   @override
   Widget build(BuildContext context) {
@@ -52,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
         return Center(child: Text('Help Tab'));
 
       case 4:
-        return Center(child: Text('Profile Tab'));
+        return UserProfile();
 
       default:
         return Home();
@@ -85,8 +86,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
       case 4:
         return AppBar(
-          title: Text('Profile'),
           centerTitle: true,
+          title: Text("My Profile"),
+          actions: [
+            IconButton(icon: Icon(Icons.edit_rounded), onPressed: () {})
+          ],
         );
       // default:
       //   return AppBar(
