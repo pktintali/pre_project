@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pre_project/pradeep/home.dart';
 import 'package:pre_project/myDrawer.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+import 'package:pre_project/vartul/explore.dart';
 
 class MyHomePage extends StatefulWidget {
   static const id = "MyHomePage";
@@ -41,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget tabsWidget() {
     switch (selectedTab) {
       case 0:
-        return Center(child: Text('Nearby Tab'));
+        return Explore();
 
       case 1:
         return Center(child: Text('Category Tab'));
