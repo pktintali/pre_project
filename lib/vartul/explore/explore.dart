@@ -86,8 +86,7 @@ class _Explore extends State<Explore> {
                   },
                 ))),
 
-          sb.buildFloatingSearchBar(),
-
+        sb.buildFloatingSearchBar(),
       ]),
     );
   }
