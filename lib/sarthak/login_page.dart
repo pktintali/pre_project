@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pre_project/mainHomePage.dart';
+import 'package:pre_project/sarthak/singup.dart';
 
 class LoginPage extends StatelessWidget {
   static const routename = '/login';
@@ -44,64 +46,66 @@ class LoginPage extends StatelessWidget {
               Padding(padding: EdgeInsets.all(10.0)),
               Form(
                   child: Column(
-                  children: [
-                    Card(
-                      margin: EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 4.0),
-                        child: Row(children: [
-                          Flexible(
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                labelText: " Email",
-                                hintText: " Enter Email",
-                              ),
-                              keyboardType: TextInputType.emailAddress,
+                children: [
+                  Card(
+                    margin: EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 4.0),
+                      child: Row(children: [
+                        Flexible(
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              labelText: " Email",
+                              hintText: " Enter Email",
                             ),
+                            keyboardType: TextInputType.emailAddress,
                           ),
-                          Icon(Icons.email_sharp,)
-                        ]),
-                      ),
-                    ),
-                    Card(
-                      margin: EdgeInsets.all(8.0),
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 4.0),
-                        child: Row(
-                          children: [
-                            Flexible(
-                              child: TextFormField(
-                                obscureText: true,
-                                decoration: InputDecoration(
-                                  labelText: " Password",
-                                  hintText: " Enter Password",
-                                ),
-                              ),
-                            ),
-                            Icon(Icons.archive_outlined),
-                          ],
                         ),
+                        Icon(
+                          Icons.email_sharp,
+                        )
+                      ]),
                     ),
                   ),
-                    Padding(padding: EdgeInsets.all(4.0)),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: 165,
-                          child: RaisedButton(
-                            child: Text(
-                              'Sign in as User',
-                              style: TextStyle(
-                                color: Colors.green,
-                                fontWeight: FontWeight.bold,
+                  Card(
+                    margin: EdgeInsets.all(8.0),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 4.0),
+                      child: Row(
+                        children: [
+                          Flexible(
+                            child: TextFormField(
+                              obscureText: true,
+                              decoration: InputDecoration(
+                                labelText: " Password",
+                                hintText: " Enter Password",
                               ),
                             ),
-                            onPressed: () {},
-                            color: Colors.yellow,
                           ),
+                          Icon(Icons.archive_outlined),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Padding(padding: EdgeInsets.all(4.0)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: 165,
+                        child: RaisedButton(
+                          child: Text(
+                            'Sign in as User',
+                            style: TextStyle(
+                              color: Colors.green,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          onPressed: () {},
+                          color: Colors.yellow,
                         ),
+                      ),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 5.0),
                       ),
@@ -132,12 +136,16 @@ class LoginPage extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, SignUp.routename);
+                },
                 textColor: Colors.yellow,
               ),
               Padding(padding: EdgeInsets.all(3.0)),
               FlatButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushReplacementNamed(context, MainHomePage.id);
+                  },
                   child: Text(
                     "Skip this step",
                     style: TextStyle(color: Colors.white70),

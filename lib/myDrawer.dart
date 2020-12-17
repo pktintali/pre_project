@@ -15,7 +15,7 @@ class _MyDrawerState extends State<MyDrawer> {
           UserAccountsDrawerHeader(
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                //colors: [Colors.green, Colors.yellow],
+                colors: [Colors.green, Colors.yellow],
               ),
               color: Colors.green,
             ),
@@ -31,14 +31,6 @@ class _MyDrawerState extends State<MyDrawer> {
             title: Text('Profile'),
             leading: Icon(
               Icons.person,
-              color: Colors.green,
-            ),
-            onTap: () {},
-          ),
-          ListTile(
-            title: Text('My Purchases'),
-            leading: Icon(
-              Icons.money,
               color: Colors.green,
             ),
             onTap: () {},

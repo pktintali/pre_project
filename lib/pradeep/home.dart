@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:pre_project/pradeep/Constants.dart';
+// import 'package:pre_project/pradeep/ProductDetails.dart';
 
 class Home extends StatefulWidget {
+  static const id = "Home";
+
   @override
   _HomeState createState() => _HomeState();
 }
-
+//comment
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
@@ -12,48 +16,20 @@ class _HomeState extends State<Home> {
       child: SingleChildScrollView(
         child: Container(
           child: Column(
-            children: [
-              Card(
-                elevation: 2.0,
-                shadowColor: Colors.green,
-                //color: Colors.lightGreenAccent,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text('Featured Products'),
-                ),
-              ),
-              productCard(
-                img:
-                    'https://europatat.eu/wp-content/uploads/2016/10/shutterstock_234553048.png',
-                name: 'Best Quality Potato',
-                price: '₹30/Kg',
-              ),
-              productCard(
-                img: 'https://pngimg.com/uploads/tomato/tomato_PNG12590.png',
-                name: 'Fresh Tomato',
-                price: '₹50/Kg',
-              ),
-              productCard(
-                img: 'https://pngimg.com/uploads/onion/onion_PNG3823.png',
-                name: 'Onion',
-                price: '₹35/Kg',
-              ),
-              Card(
-                elevation: 2.0,
-                shadowColor: Colors.green,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text('Recomended Products'),
-                ),
-              ),
-              Card(
-                elevation: 2.0,
-                shadowColor: Colors.green,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text('Populer Products'),
-                ),
-              ),
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              productCategoryList(height: 70, width: 60, wide: false),
+              Constants.categoryButton(category: 'Featured Products'),
+              productCard(),
+              Constants.categoryButton(category: 'Recommended Products'),
+              productCard(),
+              productCard(),
+              Constants.categoryButton(category: 'Popular in Your Area'),
+              productCard(),
+              Constants.categoryButton(category: 'For You'),
+              productCard(),
+              Constants.categoryButton(category: 'Top in Vegetables'),
+              productCard(),
             ],
           ),
         ),
@@ -61,105 +37,118 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget productCard({String img = '', String name = '', String price = ''}) {
-    return Padding(
-      padding: const EdgeInsets.all(4.0),
-      child: Card(
-        elevation: 3.0,
-        //shadowColor: Colors.green,
-        child: Padding(
-          padding: const EdgeInsets.all(4.0),
-          child: Column(
-            children: [
-              FlatButton(
-                padding: EdgeInsets.all(0),
-                onPressed: () {},
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      width: 150,
-                      child: Image.network(
-                        img,
-                        fit: BoxFit.contain,
-                      ),
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          name,
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          price,
-                          //'₹199',
-                          style: TextStyle(
-                            fontSize: 18,
-                            //color: Colors.grey[600],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text('Place :     '),
-                            Text(
-                              'Bahuara Gate',
-                              style: TextStyle(
-                                fontWeight: FontWeight.normal,
-                                color: Colors.grey[600],
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text('Seller :     '),
-                            Text(
-                              'Ramu Kaka',
-                              style: TextStyle(
-                                fontWeight: FontWeight.normal,
-                                color: Colors.grey[600],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 5.0,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  Widget productCategoryList(
+      {@required double height, @required double width, bool wide}) {
+    return SizedBox(
+      height: height,
+      child: ListView.builder(
+        physics: ClampingScrollPhysics(),
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        itemCount: 11,
+        itemBuilder: (BuildContext context, int index) => Card(
+          // color: Color(0xFFFFFCD1),
+          child: GestureDetector(
+            onTap: () {},
+            child: Container(
+              width: width,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  FlatButton(
-                    color: Colors.lightGreenAccent,
-                    onPressed: () {},
-                    child: Text('Call Seller'),
-                  ),
-                  FlatButton(
-                    color: Colors.yellow,
-                    onPressed: () {},
-                    child: Text('Directions'),
+                  Icon(Constants.myIcons(index)),
+                  Text(
+                    'Category',
+                    style: TextStyle(
+                      fontSize: 9,
+                    ),
                   ),
                 ],
               ),
-            ],
+            ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget productCard() {
+    return SizedBox(
+      height: 145,
+      child: ListView.builder(
+        physics: ClampingScrollPhysics(),
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        itemCount: 11,
+        itemBuilder: (BuildContext context, int index) => Card(
+          // color: Color(0xFFFFFCD1),
+          child: Container(
+            width: 130,
+            child: Center(
+              child: productCardItem(product: Constants.products[index]),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget productCardItem({List<String> product}) {
+    return RawMaterialButton(
+      onPressed: () {},
+      child: Column(
+        children: [
+          Container(
+            height: 85,
+            child: Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: Image.network(
+                product[0],
+                fit: BoxFit.contain,
+              ),
+            ),
+          ),
+          SizedBox(height: 6),
+          Center(child: Text(product[1])),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.green,
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(100),
+                    ),
+                  ),
+                  height: 18,
+                  width: 37,
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          '4.5',
+                          style: TextStyle(
+                            fontSize: 11,
+                            color: Colors.white,
+                          ),
+                        ),
+                        Icon(
+                          Icons.star,
+                          size: 12,
+                          color: Colors.white,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Text(product[2])
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
