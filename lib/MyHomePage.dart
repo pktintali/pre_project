@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:pre_project/pradeep/home.dart';
 import 'package:pre_project/myDrawer.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
-import 'package:pre_project/vartul/explore.dart';
+import 'package:pre_project/vartul/explore/explore.dart';
 
 class MyHomePage extends StatefulWidget {
   static const id = "MyHomePage";
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
+//commit 2
 
 class _MyHomePageState extends State<MyHomePage> {
   int selectedTab = 2;
@@ -60,16 +61,21 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget tabsAppBar() {
     switch (selectedTab) {
-      case 0:
-        return AppBar(
-          title: Text('Nearby'),
-          centerTitle: true,
-        );
-
       case 1:
         return AppBar(
           title: Text('Category'),
           centerTitle: true,
+        );
+      case 2:
+        return AppBar(
+          title: Text('Welcome'),
+          centerTitle: true,
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.search),
+            ),
+          ],
         );
       case 3:
         return AppBar(
@@ -82,17 +88,17 @@ class _MyHomePageState extends State<MyHomePage> {
           title: Text('Profile'),
           centerTitle: true,
         );
-      default:
-        return AppBar(
-          title: Text('Welcome'),
-          centerTitle: true,
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.search),
-            ),
-          ],
-        );
+      // default:
+      //   return AppBar(
+      //     title: Text('Welcome'),
+      //     centerTitle: true,
+      //     actions: [
+      //       IconButton(
+      //         onPressed: () {},
+      //         icon: Icon(Icons.search),
+      //       ),
+      //     ],
+      //   );
     }
   }
 }
