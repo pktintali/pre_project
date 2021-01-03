@@ -12,6 +12,7 @@ class SeeAll extends StatefulWidget {
 class _SeeAllState extends State<SeeAll> {
   @override
   Widget build(BuildContext context) {
+    final orientation = MediaQuery.of(context).orientation;
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.type),
@@ -19,39 +20,20 @@ class _SeeAllState extends State<SeeAll> {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5.0),
-        child: ListView.builder(
-          physics: ClampingScrollPhysics(),
-          shrinkWrap: true,
-          scrollDirection: Axis.vertical,
-          itemCount: widget.data.length,
-          itemBuilder: (BuildContext context, int index) => Row(
-            children: [
-              Expanded(
-                child: Card(
-                  child: Container(
-                    width: 130,
-                    child: Center(
-                      child: Constants.productCardItem(
-                        context: context,
-                          fromFulll: true, product: widget.data[index]),
-                    ),
-                  ),
-                ),
+        child: GridView.builder(
+          itemCount: 10,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: (orientation == Orientation.portrait) ? 2 : 4),
+          itemBuilder: (BuildContext context, int index) => Card(
+            child: Container(
+              width: 130,
+              child: Center(
+                child: Constants.productCardItem(
+                    context: context,
+                    fromFull: true,
+                    product: widget.data[index]),
               ),
-              Expanded(
-                child: Card(
-                  // color: Color(0xFFFFFCD1),
-                  child: Container(
-                    width: 130,
-                    child: Center(
-                      child: Constants.productCardItem(
-                        context: context,
-                          fromFulll: true, product: widget.data[index]),
-                    ),
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),

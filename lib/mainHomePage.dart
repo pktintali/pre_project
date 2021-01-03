@@ -15,6 +15,7 @@ class MainHomePage extends StatefulWidget {
 
 class _MainHomePageState extends State<MainHomePage> {
   int selectedTab = 2;
+  Color _tabColor = Colors.green;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +30,7 @@ class _MainHomePageState extends State<MainHomePage> {
           TabItem(icon: Icons.account_circle_rounded, title: 'Profile'),
         ],
         color: Colors.white70,
-        backgroundColor: Colors.green,
+        backgroundColor: _tabColor,
         initialActiveIndex: selectedTab,
         onTap: (tab) {
           setState(() {

@@ -81,7 +81,9 @@ class ProductDetails extends StatelessWidget {
               Container(
                 height: 260,
                 child: Image.network(
-                    'https://www.freepnglogos.com/uploads/corn-png/corn-only-organic-2.png'),
+                  'https://www.freepnglogos.com/uploads/corn-png/corn-only-organic-2.png',
+                  fit: BoxFit.fill,
+                ),
               ),
               SizedBox(height: 8),
               Row(

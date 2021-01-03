@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:pre_project/myDrawer.dart';
 import 'package:pre_project/pradeep/Constants.dart';
-import 'package:pre_project/vartul/explore/BuildSearchBar.dart';
+import 'package:pre_project/pradeep/pages/CategoryView.dart';
 
 class Home extends StatefulWidget {
   static const id = "Home";
-
   @override
   _HomeState createState() => _HomeState();
 }
 
-//comment
 class _HomeState extends State<Home> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   Future<double> get _height => Future<double>.value(900);
-  BuildSearchBar searchBar = BuildSearchBar();
+  Color _bgColor = Color(0xFFEDFDEC);
+  Color mainColor = Colors.green;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green,
+      backgroundColor: mainColor,
       drawer: MyDrawer(),
       key: _scaffoldKey,
       body: Container(
@@ -35,7 +35,7 @@ class _HomeState extends State<Home> {
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.green,
+                        color: mainColor,
                         spreadRadius: 0.5,
                         blurRadius: 0.8,
                       ),
@@ -48,7 +48,7 @@ class _HomeState extends State<Home> {
                       IconButton(
                         icon: Icon(
                           Icons.menu,
-                          color: Colors.green,
+                          color: mainColor,
                         ),
                         onPressed: () {
                           _scaffoldKey.currentState.openDrawer();
@@ -58,6 +58,7 @@ class _HomeState extends State<Home> {
                         child: TextField(
                           decoration: InputDecoration(
                             hintText: "Search",
+                            contentPadding: EdgeInsets.all(5.0),
                             enabledBorder: InputBorder.none,
                             disabledBorder: InputBorder.none,
                             border: InputBorder.none,
@@ -67,7 +68,7 @@ class _HomeState extends State<Home> {
                       IconButton(
                         icon: Icon(
                           Icons.search,
-                          color: Colors.green,
+                          color: mainColor,
                         ),
                         onPressed: () {},
                       ),
@@ -84,7 +85,8 @@ class _HomeState extends State<Home> {
                   builder: (context, snapshot) {
                     return AnimatedContainer(
                       decoration: BoxDecoration(
-                        color: Color(0xFFEDFDEC),
+                        color: _bgColor,
+                        //!Main Bg Color
                       ),
                       height: snapshot.data,
                       duration: Duration(seconds: 4),
@@ -123,7 +125,7 @@ class _HomeState extends State<Home> {
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(20)),
                                     side: BorderSide(
-                                      color: Colors.green,
+                                      color: mainColor,
                                     )),
                                 child: Text(
                                   'Load More',
@@ -162,38 +164,46 @@ class _HomeState extends State<Home> {
         physics: ClampingScrollPhysics(),
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
-        itemCount: 10,
+        itemCount: 6,
         itemBuilder: (BuildContext context, int index) => Card(
-          // color: Color(0xFFFFFCD1),
-          child: GestureDetector(
-            onTap: () {},
-            child: Container(
-              width: width,
-              child: FlatButton(
-                padding: EdgeInsets.all(0),
-                onPressed: () {},
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      height: 48,
-                      width: 56,
+          child: Container(
+            width: width,
+            child: FlatButton(
+              padding: EdgeInsets.all(0),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => CategoryView(
+                              type: data[index][1],
+                              imgUrl: data[index][0],
+                            )));
+              },
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    //Modified 48 --> 46 while testing on windows
+                    height: 46,
+                    width: 56,
+                    child: Hero(
+                      tag: data[index][0],
                       child: Image.network(
                         data[index][0],
                         fit: BoxFit.contain,
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 3),
-                      child: Text(
-                        data[index][1],
-                        style: TextStyle(
-                          fontSize: 9,
-                        ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 3),
+                    child: Text(
+                      data[index][1],
+                      style: TextStyle(
+                        fontSize: 9,
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),
