@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:pre_project/sarthak/addproduct.dart';
+import 'package:pre_project/sarthak/vendor_profile.dart';
 
 class MyDrawer extends StatefulWidget {
   @override
@@ -34,7 +35,9 @@ class _MyDrawerState extends State<MyDrawer> {
               Icons.person,
               color: Colors.green,
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, VendorProfile.routename);
+            },
           ),
           ListTile(
             title: Text('Favorites'),

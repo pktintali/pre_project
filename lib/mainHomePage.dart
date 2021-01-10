@@ -4,7 +4,6 @@ import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:pre_project/pradeep/pages/Alerts.dart';
 import 'package:pre_project/sarthak/user_profile.dart';
 import 'package:pre_project/vartul/explore/explore.dart';
- import 'package:pre_project/vartul/explore/explore.dart';
 import 'ankan/categoryPage.dart';
 
 class MainHomePage extends StatefulWidget {

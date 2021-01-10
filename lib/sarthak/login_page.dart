@@ -9,12 +9,12 @@ class LoginPage extends StatelessWidget {
     final mdq = MediaQuery.of(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: SingleChildScrollView(
-        child: Container(
-          alignment: Alignment.topCenter,
-          width: mdq.size.width,
-          height: mdq.size.height,
-          color: Colors.green,
+      body: Container(
+        alignment: Alignment.topCenter,
+        width: mdq.size.width,
+        height: mdq.size.height,
+        color: Colors.green,
+        child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -118,7 +118,7 @@ class LoginPage extends StatelessWidget {
                     ),
                     Padding(padding: EdgeInsets.all(4.0)),
                     Container(
-                      width: MediaQuery.of(context).size.width*0.75,
+                      width: MediaQuery.of(context).size.width * 0.75,
                       alignment: Alignment.center,
                       child: RaisedButton(
                         child: Text(
@@ -156,18 +156,18 @@ class LoginPage extends StatelessWidget {
                 },
                 child: Text(
                   "Forgot Password ? Need help ",
-                  style: TextStyle(color: Colors.white70,fontSize: 16),
+                  style: TextStyle(color: Colors.white70, fontSize: 16),
                 ),
               ),
               // Padding(padding: EdgeInsets.all(2.0)),
               FlatButton(
-                  onPressed: () {
-                    Navigator.pushReplacementNamed(context, MainHomePage.id);
-                  },
-                  child: Text(
-                    "Skip this step",
-                    style: TextStyle(color: Colors.white70),
-                  ),
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, MainHomePage.id);
+                },
+                child: Text(
+                  "Skip this step",
+                  style: TextStyle(color: Colors.white70),
+                ),
               ),
             ],
           ),
