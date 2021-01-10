@@ -1,78 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:pre_project/pradeep/pages/ProductDetails.dart';
+import 'package:pre_project/pradeep/pages/SeeAll.dart';
 
 class Constants {
-  static final List<List<String>> products = [
-    [
-      'https://www.freepnglogos.com/uploads/tomato-png/tomato-and-kidney-stone-everyday-life-23.png',
-      'Best Tomato',
-      '₹27/kg'
-    ],
-    [
-      'https://www.tajamarket.com/wp-content/uploads/2019/07/dhudhi.png',
-      'Lauki',
-      '₹10/kg'
-    ],
-    [
-      'http://clipart-library.com/image_gallery2/Onion-PNG-Picture.png',
-      'Onion',
-      '₹40/kg'
-    ],
-    [
-      'http://www.pngall.com/wp-content/uploads/2016/04/Potato-Free-Download-PNG.png',
-      'Potato',
-      '₹30/kg'
-    ],
-    [
-      'https://pngimg.com/uploads/carrot/carrot_PNG4985.png',
-      'Fresh Carrot',
-      '₹15/kg'
-    ],
-    [
-      'https://www.freepnglogos.com/uploads/corn-png/corn-only-organic-2.png',
-      'Corn',
-      '₹30/unit'
-    ],
-    [
-      'https://www.freepnglogos.com/uploads/tomato-png/tomato-and-kidney-stone-everyday-life-23.png',
-      'Best Tomato',
-      '₹27/kg'
-    ],
-    [
-      'https://www.tajamarket.com/wp-content/uploads/2019/07/dhudhi.png',
-      'Lauki',
-      '₹10/kg'
-    ],
-    [
-      'http://clipart-library.com/image_gallery2/Onion-PNG-Picture.png',
-      'Onion',
-      '₹40/kg'
-    ],
-    [
-      'http://www.pngall.com/wp-content/uploads/2016/04/Potato-Free-Download-PNG.png',
-      'Potato',
-      '₹30/kg'
-    ],
-    [
-      'https://pngimg.com/uploads/carrot/carrot_PNG4985.png',
-      'Fresh Carrot',
-      '₹15/kg'
-    ],
-    [
-      'https://www.freepnglogos.com/uploads/corn-png/corn-only-organic-2.png',
-      'Corn',
-      '₹30/pec'
-    ],
-  ];
-
-  static Widget categoryButton({@required String category}) {
+  static Widget categoryButton(
+      {@required String category, BuildContext context}) {
     return FlatButton(
       onPressed: () {
-        // Navigator.push(
-        //     context,
-        //     MaterialPageRoute(
-        //         builder: (context) => ViewAll(
-        //               future: future,
-        //             )));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => SeeAll(
+                      data: products,
+                      type: category,
+                    )));
       },
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -88,45 +29,342 @@ class Constants {
             padding: const EdgeInsets.only(
               left: 10,
             ),
-            child: Text(category),
+            child: Text(
+              category,
+              style: TextStyle(
+                color: Color(0xFF5600E8),
+              ),
+            ),
           ),
           Icon(
             Icons.arrow_forward,
             color: Color(0xFF5600E8),
+            // color: Colors.green,
           ),
         ],
       ),
     );
   }
 
-  static IconData myIcons(int i) {
-    switch (i) {
-      case 1:
-        return Icons.badge;
-        break;
-      case 2:
-        return Icons.category;
-        break;
-      case 3:
-        return Icons.favorite;
-        break;
-      case 4:
-        return Icons.add_box;
-        break;
-      case 5:
-        return Icons.train;
-        break;
-      case 6:
-        return Icons.traffic;
-        break;
-      case 7:
-        return Icons.add_alert_sharp;
-        break;
-      case 8:
-        return Icons.badge;
-        break;
-      default:
-        return Icons.account_circle_rounded;
-    }
+  //Main Product Card USed for every product
+  static Widget productCard() {
+    return SizedBox(
+      height: 145,
+      child: ListView.builder(
+        physics: ClampingScrollPhysics(),
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        itemCount: 11,
+        itemBuilder: (BuildContext context, int index) => Card(
+          // color: Color(0xFFFFFCD1),
+          child: Container(
+            width: 130,
+            child: Center(
+              child: productCardItem(
+                  context: context, product: Constants.products[index]),
+            ),
+          ),
+        ),
+      ),
+    );
   }
+
+//Item for productcard
+  static Widget productCardItem(
+      {List<String> product, bool fromFull = false, BuildContext context}) {
+    return RawMaterialButton(
+      onPressed: () {
+        Navigator.pushNamed(context, ProductDetails.id);
+      },
+      child: Column(
+        children: [
+          fromFull
+              ? Container(
+                  // height: 85,
+                  child: Padding(
+                    padding: const EdgeInsets.all(2.0),
+                    child: Image.network(
+                      product[0],
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                )
+              : Container(
+                  //Changed 86-->83 while testing on windows
+                  height: 83,
+                  child: Padding(
+                    padding: const EdgeInsets.all(2.0),
+                    child: Image.network(
+                      product[0],
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                ),
+          SizedBox(height: 4),
+          Center(child: Text(product[1])),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.green,
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(100),
+                    ),
+                  ),
+                  height: 18,
+                  width: 37,
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          '4.5',
+                          style: TextStyle(
+                            fontSize: 11,
+                            color: Colors.white,
+                          ),
+                        ),
+                        Icon(
+                          Icons.star,
+                          size: 12,
+                          color: Colors.white,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Text(product[2])
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  static Widget sellerCard() {
+    return SizedBox(
+      height: 110,
+      child: ListView.builder(
+        physics: ClampingScrollPhysics(),
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        itemCount: 15,
+        itemBuilder: (BuildContext context, int index) => Column(
+          children: [
+            Container(
+              child: RawMaterialButton(
+                onPressed: () {},
+                padding: EdgeInsets.all(0),
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(100)),
+                  ),
+                  child: CircleAvatar(
+                    radius: 40.0,
+                    backgroundImage: NetworkImage(
+                        'https://tekrabuilders.com/wp-content/uploads/2018/12/male-placeholder-image.jpeg'),
+                  ),
+                ),
+              ),
+            ),
+            Text('Seller X'),
+          ],
+        ),
+      ),
+    );
+  }
+
+  static Widget usersCardItem(
+      {List<String> product, bool fromFull = false, BuildContext context}) {
+    return Padding(
+      padding: EdgeInsets.all(10.0),
+      child: RaisedButton(
+        onPressed: () {},
+        //elevation: 8.0,
+        color: Colors.white,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Container(
+                child: CircleAvatar(
+                  radius: 30.0,
+                  backgroundImage: NetworkImage(product[0]),
+                ),
+              ),
+            ),
+            Text(
+              'Seller X',
+              style: TextStyle(
+                  fontSize: 14.0,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w500),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  static final List<List<String>> products = [
+    [
+      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'Product Name',
+      '₹X',
+      'Rating'
+    ],
+    [
+      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'Product Name',
+      '₹X',
+      'Rating'
+    ],
+    [
+      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'Product Name',
+      '₹X',
+      'Rating'
+    ],
+    [
+      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'Product Name',
+      '₹X',
+      'Rating'
+    ],
+    [
+      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'Product Name',
+      '₹X',
+      'Rating'
+    ],
+    [
+      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'Product Name',
+      '₹X',
+      'Rating'
+    ],
+    [
+      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'Product Name',
+      '₹X',
+      'Rating'
+    ],
+    [
+      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'Product Name',
+      '₹X',
+      'Rating'
+    ],
+    [
+      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'Product Name',
+      '₹X',
+      'Rating'
+    ],
+    [
+      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'Product Name',
+      '₹X',
+      'Rating'
+    ],
+    [
+      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'Product Name',
+      '₹X',
+      'Rating'
+    ],
+  ];
+
+  static List<List<String>> categoryData = [
+    [
+      'https://www.seekpng.com/png/detail/894-8942715_fruits-amp-vegetables-clipart-png-fruit-vegetable-png.png',
+      'Fruits'
+    ],
+    [
+      'https://4.imimg.com/data4/WA/BC/IMOB-34484009/c__data_users_defapps_appdata_internetexplorer_temp_sav-500x500.png',
+      'Vegetables'
+    ],
+    [
+      'https://4.imimg.com/data4/YI/XR/MY-26823497/branded-mrp-items-500x500.jpg',
+      'Drinks'
+    ],
+    [
+      'https://i2-prod.gloucestershirelive.co.uk/incoming/article2388909.ece/ALTERNATES/s615/1_Poundland-Promotion.jpg',
+      'Household'
+    ],
+    [
+      'https://5.imimg.com/data5/XU/DX/PV/SELLER-3277670/dry-fruits-500x500.jpg',
+      'Dry Fruits'
+    ],
+    [
+      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'Dummy1'
+    ],
+    [
+      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'Dummy2'
+    ],
+    [
+      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'Dummy3'
+    ],
+    [
+      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'Dummy4'
+    ],
+    [
+      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'Dummy5'
+    ],
+    [
+      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'Dummy6'
+    ],
+    [
+      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'Dummy7'
+    ],
+    [
+      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'Dummy8'
+    ],
+    [
+      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'Dummy9'
+    ],
+    [
+      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'Dummy10'
+    ],
+    [
+      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'Dummy11'
+    ],
+    [
+      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'Dummy12'
+    ],
+    [
+      'https://4.imimg.com/data4/YI/XR/MY-26823497/branded-mrp-items-500x500.jpg',
+      'Drinks'
+    ],
+    [
+      'https://4.imimg.com/data4/WA/BC/IMOB-34484009/c__data_users_defapps_appdata_internetexplorer_temp_sav-500x500.png',
+      'Vegetables'
+    ],
+    [
+      'https://i2-prod.gloucestershirelive.co.uk/incoming/article2388909.ece/ALTERNATES/s615/1_Poundland-Promotion.jpg',
+      'Household'
+    ],
+    [
+      'https://5.imimg.com/data5/XU/DX/PV/SELLER-3277670/dry-fruits-500x500.jpg',
+      'Dry Fruits'
+    ],
+  ];
 }

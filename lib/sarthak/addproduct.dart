@@ -40,7 +40,7 @@ class AddProduct extends StatelessWidget {
                 Card(
                   child: TextField(
                     decoration: InputDecoration(
-                      labelText: ' Product Name',
+                      labelText: ' Product Name *',
                       hintText: ' Product Name',
                     ),
                   ),
@@ -48,7 +48,7 @@ class AddProduct extends StatelessWidget {
                 Card(
                   child: TextField(
                     decoration: InputDecoration(
-                      labelText: ' Price',
+                      labelText: ' Price *',
                       hintText: ' Price',
                     ),
                   ),
@@ -56,7 +56,7 @@ class AddProduct extends StatelessWidget {
                 Card(
                   child: TextField(
                     decoration: InputDecoration(
-                      labelText: ' Explain Price',
+                      labelText: ' Explain Price *',
                       hintText: ' Explain Price',
                     ),
                   ),
@@ -64,7 +64,7 @@ class AddProduct extends StatelessWidget {
                 Card(
                   child: TextField(
                     decoration: InputDecoration(
-                      labelText: ' Quantity',
+                      labelText: ' Quantity *',
                       hintText: ' Quantity',
                     ),
                   ),
@@ -80,7 +80,7 @@ class AddProduct extends StatelessWidget {
                 Card(
                   child: TextField(
                     decoration: InputDecoration(
-                      labelText: ' Category (Optional)',
+                      labelText: ' Category ',
                       hintText: ' Category',
                     ),
                   ),
@@ -88,7 +88,7 @@ class AddProduct extends StatelessWidget {
                 Card(
                   child: TextField(
                     decoration: InputDecoration(
-                      labelText: ' Brand (Optional)',
+                      labelText: ' Brand ',
                       hintText: ' Brand',
                     ),
                   ),
@@ -97,22 +97,20 @@ class AddProduct extends StatelessWidget {
                 Card(
                   child: TextField(
                     decoration: InputDecoration(
-                      labelText: ' Product Id (Optional)',
+                      labelText: ' Product Id ',
                       hintText: ' Barcode/Local ',
                     ),
                   ),
                 ),
                 Card(
-                  child: Container(
-                    height: 150,
-                    child: TextField(
-                      //textAlign: TextAlign.center,
-                      autocorrect: true,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        labelText: ' Description',
-                        hintText: ' Describe your Product',
-                      ),
+                  child: TextField(
+                    textAlign: TextAlign.start,
+                    autocorrect: true,
+                    maxLines: 3,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      labelText: ' Description *',
+                      hintText: ' Describe your Product',
                     ),
                   ),
                 ),
