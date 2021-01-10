@@ -15,6 +15,7 @@ class _AlertsState extends State<Alerts> {
         leading: Container(),
       ),
       body: ListView.builder(
+        physics: BouncingScrollPhysics(),
         itemCount: 20,
         itemBuilder: (context, index) {
           return index == 19 ? SizedBox(height: 30) : alerTtile();

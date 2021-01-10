@@ -1,8 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:pre_project/pradeep/Constants.dart';
+import 'package:share/share.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProductDetails extends StatelessWidget {
   static const id = "ProductDetails";
+  _callAction() async {
+    const url = 'tel:+91 7985270343';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  _directionAction() async {
+    const url = "geo:25.317649,82.973935;u=35";
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +57,7 @@ class ProductDetails extends StatelessWidget {
               child: FlatButton(
                 height: 58,
                 color: Colors.lightGreenAccent,
-                onPressed: () {},
+                onPressed: _callAction,
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Text(
@@ -53,7 +73,7 @@ class ProductDetails extends StatelessWidget {
               child: FlatButton(
                 height: 58,
                 color: Colors.yellow,
-                onPressed: () {},
+                onPressed: _directionAction,
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Text(
@@ -73,16 +93,20 @@ class ProductDetails extends StatelessWidget {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                height: 260,
-                child: Image.network(
-                  'https://www.freepnglogos.com/uploads/corn-png/corn-only-organic-2.png',
-                  fit: BoxFit.fill,
+              Center(
+                child: Container(
+                  // height: 260,
+                  height: MediaQuery.of(context).size.height / 2,
+                  child: Image.network(
+                    'https://www.freepnglogos.com/uploads/corn-png/corn-only-organic-2.png',
+                    fit: BoxFit.fill,
+                  ),
                 ),
               ),
               SizedBox(height: 8),
@@ -142,7 +166,11 @@ class ProductDetails extends StatelessWidget {
                         Icons.share,
                         color: Colors.green,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Share.share(
+                            'I got best quality corn here. You can also try https://dsc-noticeboard--beta-l0w8e5rl.web.app/',
+                            subject: 'Best Quality Corn');
+                      },
                     ),
                   ),
                 ],

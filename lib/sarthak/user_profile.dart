@@ -9,6 +9,7 @@ class UserProfile extends StatelessWidget {
       appBar: AppBar(
         title: Text('Profile'),
         centerTitle: true,
+        leading: Container(),
       ),
       body: SingleChildScrollView(
         child: Container(

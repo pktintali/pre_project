@@ -91,6 +91,7 @@ class _HomeState extends State<Home> {
                       height: snapshot.data,
                       duration: Duration(seconds: 4),
                       child: SingleChildScrollView(
+                        physics: BouncingScrollPhysics(),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
@@ -164,7 +165,7 @@ class _HomeState extends State<Home> {
         physics: ClampingScrollPhysics(),
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
-        itemCount: 6,
+        itemCount: 15,
         itemBuilder: (BuildContext context, int index) => Card(
           child: Container(
             width: width,
@@ -187,7 +188,7 @@ class _HomeState extends State<Home> {
                     height: 46,
                     width: 56,
                     child: Hero(
-                      tag: data[index][0],
+                      tag: data[index][1] + data[index][0],
                       child: Image.network(
                         data[index][0],
                         fit: BoxFit.contain,

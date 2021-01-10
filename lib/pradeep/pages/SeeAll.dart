@@ -22,6 +22,7 @@ class _SeeAllState extends State<SeeAll> {
         padding: const EdgeInsets.symmetric(horizontal: 5.0),
         child: GridView.builder(
           itemCount: 10,
+          physics: BouncingScrollPhysics(),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: (orientation == Orientation.portrait) ? 2 : 4),
           itemBuilder: (BuildContext context, int index) => Card(

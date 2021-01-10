@@ -54,7 +54,7 @@ class Constants {
         physics: ClampingScrollPhysics(),
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
-        itemCount: 6,
+        itemCount: 11,
         itemBuilder: (BuildContext context, int index) => Card(
           // color: Color(0xFFFFFCD1),
           child: Container(
@@ -100,7 +100,7 @@ class Constants {
                     ),
                   ),
                 ),
-          SizedBox(height: 6),
+          SizedBox(height: 4),
           Center(child: Text(product[1])),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -153,7 +153,7 @@ class Constants {
         physics: ClampingScrollPhysics(),
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
-        itemCount: 6,
+        itemCount: 15,
         itemBuilder: (BuildContext context, int index) => Column(
           children: [
             Container(
@@ -302,7 +302,54 @@ class Constants {
       'https://5.imimg.com/data5/XU/DX/PV/SELLER-3277670/dry-fruits-500x500.jpg',
       'Dry Fruits'
     ],
-    ['https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png', 'Dummy'],
+    [
+      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'Dummy1'
+    ],
+    [
+      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'Dummy2'
+    ],
+    [
+      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'Dummy3'
+    ],
+    [
+      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'Dummy4'
+    ],
+    [
+      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'Dummy5'
+    ],
+    [
+      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'Dummy6'
+    ],
+    [
+      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'Dummy7'
+    ],
+    [
+      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'Dummy8'
+    ],
+    [
+      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'Dummy9'
+    ],
+    [
+      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'Dummy10'
+    ],
+    [
+      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'Dummy11'
+    ],
+    [
+      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'Dummy12'
+    ],
     [
       'https://4.imimg.com/data4/YI/XR/MY-26823497/branded-mrp-items-500x500.jpg',
       'Drinks'

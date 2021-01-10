@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:pre_project/pradeep/Constants.dart';
 
 class CategoryView extends StatefulWidget {
@@ -39,7 +40,7 @@ class _CategoryViewState extends State<CategoryView> {
                       ]),
                     ),
                     background: Hero(
-                      tag: widget.imgUrl,
+                      tag: widget.type + widget.imgUrl,
                       child: Container(
                         decoration: BoxDecoration(
                             image: DecorationImage(
@@ -55,66 +56,57 @@ class _CategoryViewState extends State<CategoryView> {
               )
             ];
           },
-          body: SingleChildScrollView(
-            child: Container(
-              color: Color(0xFFEDFDEC),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text('Top ${widget.type} sellers'),
-                  SizedBox(height: 10),
-                  Constants.sellerCard(),
-                  productList(),
-                ],
-              ),
-            ),
+          body: Container(
+            color: Color(0xFFEDFDEC),
+            child: productList(context: context),
           ),
         ),
       ),
     );
   }
 
-  Widget productList() {
+  Widget productList({BuildContext context}) {
+    final orientation = MediaQuery.of(context).orientation;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5.0),
-      child: ListView.builder(
-        physics: ClampingScrollPhysics(),
-        shrinkWrap: true,
-        scrollDirection: Axis.vertical,
-        itemCount: 6,
-        itemBuilder: (BuildContext context, int index) => Row(
-          children: [
-            Expanded(
-              child: Card(
+      child: StaggeredGridView.countBuilder(
+        padding: EdgeInsets.all(0),
+        crossAxisCount: (orientation == Orientation.portrait) ? 2 : 4,
+        itemCount: 11,
+        physics: BouncingScrollPhysics(),
+        // crossAxisSpacing: 20,
+        // mainAxisSpacing: 20,
+        staggeredTileBuilder: (index) => StaggeredTile.fit(index != 0
+            ? 1
+            : (orientation == Orientation.portrait)
+                ? 2
+                : 4),
+        itemBuilder: (BuildContext context, int index) => index == 0
+            ? Container(
+                color: Color(0xFFEDFDEC),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text('Top ${widget.type} sellers'),
+                    SizedBox(height: 10),
+                    Constants.sellerCard(),
+                  ],
+                ),
+              )
+            : Card(
                 child: Container(
                   width: 130,
                   child: Center(
                     child: Constants.productCardItem(
-                        context: context,
-                        fromFull: true,
-                        product: Constants.products[index]),
+                      context: context,
+                      fromFull: true,
+                      product: Constants.products[index],
+                    ),
                   ),
                 ),
               ),
-            ),
-            Expanded(
-              child: Card(
-                // color: Color(0xFFFFFCD1),
-                child: Container(
-                  width: 130,
-                  child: Center(
-                    child: Constants.productCardItem(
-                        context: context,
-                        fromFull: true,
-                        product: Constants.products[index]),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }
