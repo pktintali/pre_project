@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:pre_project/sarthak/addproduct.dart';
+import 'package:pre_project/sarthak/vendor_profile.dart';
 
 class MyDrawer extends StatefulWidget {
   @override
@@ -33,7 +35,9 @@ class _MyDrawerState extends State<MyDrawer> {
               Icons.person,
               color: Colors.green,
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, VendorProfile.routename);
+            },
           ),
           ListTile(
             title: Text('Favorites'),
@@ -42,6 +46,16 @@ class _MyDrawerState extends State<MyDrawer> {
               color: Colors.green,
             ),
             onTap: () {},
+          ),
+          ListTile(
+            title: Text('Add Product'),
+            leading: Icon(
+              Icons.add_box_rounded,
+              color: Colors.green,
+            ),
+            onTap: () {
+              Navigator.of(context).pushNamed(AddProduct.routename);
+            },
           ),
           ListTile(
             title: Text('SignOut'),
@@ -75,8 +89,7 @@ class _MyDrawerState extends State<MyDrawer> {
               'https://pbs.twimg.com/profile_images/1092180043252543489/dhvinD0d.jpg',
               width: 110,
             ),
-            applicationLegalese:
-                'This Application is designed and developed by T Developers India.for any  changes in time table developers are not responcible',
+            applicationLegalese: '@Copyrights DSC',
             applicationVersion: '0.0.0.1',
             child: Text('About'),
           )

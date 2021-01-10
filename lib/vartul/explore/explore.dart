@@ -42,53 +42,55 @@ class _Explore extends State<Explore> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: new Stack(children: <Widget>[
-        //Google map
-        Container(
-          child: GoogleMap(
-            initialCameraPosition: _initPos,
-            mapType: MapType.terrain,
-            onMapCreated: _onMapCreated,
-            zoomGesturesEnabled: true,
-            myLocationEnabled: true,
+      backgroundColor: Colors.green,
+      body: SafeArea(
+        child: new Stack(children: <Widget>[
+          //Google map
+          Container(
+            child: GoogleMap(
+              initialCameraPosition: _initPos,
+              mapType: MapType.terrain,
+              onMapCreated: _onMapCreated,
+              zoomGesturesEnabled: true,
+              myLocationEnabled: true,
+            ),
           ),
-        ),
 
-        //Location icon
-        Container(
-            child: Padding(
-                padding: const EdgeInsets.all(100),
-                child: IconButton(
-                  icon: Icon(
-                    Icons.location_on,
-                    color: Colors.blue,
-                    size: 40,
-                  ),
-                  onPressed: () {
-                    showModalBottomSheet(
-                      context: context,
-                      builder: (BuildContext bc) {
-                        return Container(
-                          color: Color(0xFF737373),
-                          child: Container(
-                            child: bm.buildBottomModal(context),
-                            height: MediaQuery.of(context).size.height * 0.8,
-                            decoration: BoxDecoration(
-                                color: Theme.of(context).canvasColor,
-                                borderRadius: BorderRadius.only(
-                                  topLeft: const Radius.circular(10),
-                                  topRight: const Radius.circular(10),
-                                )),
-                          ),
-                        );
-                      },
-                    );
-                  },
-                ))),
+          //Location icon
+          Container(
+              child: Padding(
+                  padding: const EdgeInsets.all(100),
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.location_on,
+                      color: Colors.blue,
+                      size: 40,
+                    ),
+                    onPressed: () {
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (BuildContext bc) {
+                          return Container(
+                            color: Color(0xFF737373),
+                            child: Container(
+                              child: bm.buildBottomModal(context),
+                              height: MediaQuery.of(context).size.height * 0.8,
+                              decoration: BoxDecoration(
+                                  color: Theme.of(context).canvasColor,
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: const Radius.circular(10),
+                                    topRight: const Radius.circular(10),
+                                  )),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ))),
 
           sb.buildFloatingSearchBar(),
-
-      ]),
+        ]),
+      ),
     );
   }
 }
