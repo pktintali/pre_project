@@ -5,6 +5,12 @@ import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 class BuildSearchBar {
   FloatingSearchBar buildFloatingSearchBar() {
     return FloatingSearchBar(
+      leadingActions: [
+        // IconButton(
+        //   icon: Icon(Icons.menu),
+          
+        // ),
+      ],
       iconColor: Colors.green,
       hint: 'Search...',
       scrollPadding: const EdgeInsets.only(top: 16, bottom: 56),

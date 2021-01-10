@@ -86,8 +86,7 @@ class _MyDrawerState extends State<MyDrawer> {
               'https://pbs.twimg.com/profile_images/1092180043252543489/dhvinD0d.jpg',
               width: 110,
             ),
-            applicationLegalese:
-                'This Application is designed and developed by T Developers India.for any  changes in time table developers are not responcible',
+            applicationLegalese: '@Copyrights DSC',
             applicationVersion: '0.0.0.1',
             child: Text('About'),
           )
