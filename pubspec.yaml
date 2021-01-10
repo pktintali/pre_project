@@ -12,8 +12,8 @@ dependencies:
   flutter:
     sdk: flutter
   convex_bottom_bar: ^2.6.0
-  google_maps_flutter: ^1.0.3
-  location: '3.0.2'
+  google_maps_flutter: ^1.0.6
+  location: ^3.1.0
   cupertino_icons: ^1.0.0
   http: ^0.12.2
   flutter_rating_bar: ^3.0.1+1
@@ -37,14 +37,8 @@ flutter:
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
   # example:
-  fonts:
-    - family: Nunito
-      fonts:
-        - asset: assets/fonts/Nunito/Nunito-Regular.ttf
-        - asset: assets/fonts/Nunito/Nunito-SemiBold.ttf
-          weight: 600
-        - asset: assets/fonts/Nunito/Nunito-Bold.ttf
-          weight: 700
+#  fonts:
+#
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

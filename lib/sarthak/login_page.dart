@@ -45,92 +45,100 @@ class LoginPage extends StatelessWidget {
               ),
               Padding(padding: EdgeInsets.all(10.0)),
               Form(
-                  child: Column(
-                children: [
-                  Card(
-                    margin: EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 4.0),
-                      child: Row(children: [
-                        Flexible(
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              labelText: " Email",
-                              hintText: " Enter Email",
+                child: Column(
+                  children: [
+                    Card(
+                      borderOnForeground: false,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      margin: EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 4.0),
+                        child: Row(children: [
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 2.0,
                             ),
-                            keyboardType: TextInputType.emailAddress,
                           ),
-                        ),
-                        Icon(
-                          Icons.email_sharp,
-                        )
-                      ]),
-                    ),
-                  ),
-                  Card(
-                    margin: EdgeInsets.all(8.0),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 4.0),
-                      child: Row(
-                        children: [
+                          Icon(
+                            Icons.email_sharp,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 2.0,
+                            ),
+                          ),
                           Flexible(
                             child: TextFormField(
-                              obscureText: true,
                               decoration: InputDecoration(
-                                labelText: " Password",
-                                hintText: " Enter Password",
+                                border: InputBorder.none,
+                                labelText: " Email / Phone ",
+                                hintText: " Email or Phone",
                               ),
+                              keyboardType: TextInputType.emailAddress,
                             ),
                           ),
-                          Icon(Icons.archive_outlined),
-                        ],
+                        ]),
                       ),
                     ),
-                  ),
-                  Padding(padding: EdgeInsets.all(4.0)),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: 165,
-                        child: RaisedButton(
-                          child: Text(
-                            'Sign in as User',
-                            style: TextStyle(
-                              color: Colors.green,
-                              fontWeight: FontWeight.bold,
+                    Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      margin: EdgeInsets.all(8.0),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 4.0),
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 2.0,
+                              ),
                             ),
-                          ),
-                          onPressed: () {},
-                          color: Colors.yellow,
+                            Icon(Icons.archive_outlined),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 2.0,
+                              ),
+                            ),
+                            Flexible(
+                              child: TextFormField(
+                                obscureText: true,
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  labelText: " Password",
+                                  hintText: " Password",
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 5.0),
-                      ),
-                      Container(
-                        width: 165,
-                        child: RaisedButton(
-                          child: Text(
-                            'Sign in as Vendor',
-                            style: TextStyle(
-                              color: Colors.green,
-                              fontWeight: FontWeight.bold,
-                            ),
+                    ),
+                    Padding(padding: EdgeInsets.all(4.0)),
+                    Container(
+                      width: MediaQuery.of(context).size.width*0.75,
+                      alignment: Alignment.center,
+                      child: RaisedButton(
+                        child: Text(
+                          'Sign In',
+                          style: TextStyle(
+                            color: Colors.green,
+                            fontWeight: FontWeight.bold,
                           ),
-                          onPressed: () {},
-                          color: Colors.yellow,
                         ),
+                        onPressed: () {},
+                        color: Colors.yellow,
                       ),
-                    ],
-                  ),
-                ],
-              )),
+                    ),
+                  ],
+                ),
+              ),
               Padding(padding: EdgeInsets.all(4.0)),
               OutlineButton(
                 child: Text(
-                  "  New User? Sign Up  ",
+                  "  New here ? Sign Up  ",
                   style: TextStyle(
                     color: Colors.yellow,
                     fontWeight: FontWeight.bold,
@@ -141,7 +149,17 @@ class LoginPage extends StatelessWidget {
                 },
                 textColor: Colors.yellow,
               ),
-              Padding(padding: EdgeInsets.all(3.0)),
+              Padding(padding: EdgeInsets.all(4.0)),
+              FlatButton(
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, MainHomePage.id);
+                },
+                child: Text(
+                  "Forgot Password ? Need help ",
+                  style: TextStyle(color: Colors.white70,fontSize: 16),
+                ),
+              ),
+              // Padding(padding: EdgeInsets.all(2.0)),
               FlatButton(
                   onPressed: () {
                     Navigator.pushReplacementNamed(context, MainHomePage.id);
@@ -149,7 +167,8 @@ class LoginPage extends StatelessWidget {
                   child: Text(
                     "Skip this step",
                     style: TextStyle(color: Colors.white70),
-                  )),
+                  ),
+              ),
             ],
           ),
         ),

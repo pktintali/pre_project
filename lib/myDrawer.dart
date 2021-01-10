@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:pre_project/sarthak/addproduct.dart';
 
 class MyDrawer extends StatefulWidget {
   @override
@@ -42,6 +43,16 @@ class _MyDrawerState extends State<MyDrawer> {
               color: Colors.green,
             ),
             onTap: () {},
+          ),
+          ListTile(
+            title: Text('Add Product'),
+            leading: Icon(
+              Icons.add_box_rounded,
+              color: Colors.green,
+            ),
+            onTap: () {
+              Navigator.of(context).pushNamed(AddProduct.routename);
+            },
           ),
           ListTile(
             title: Text('SignOut'),
