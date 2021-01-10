@@ -4,6 +4,8 @@ import 'package:pre_project/myDrawer.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:pre_project/sarthak/user_profile.dart';
 import 'package:pre_project/vartul/explore/explore.dart';
+ import 'package:pre_project/vartul/explore/explore.dart';
+import 'ankan/categoryPage.dart';
 
 class MainHomePage extends StatefulWidget {
   static const id = "MyHomePage";
@@ -47,7 +49,7 @@ class _MainHomePageState extends State<MainHomePage> {
         return Explore();
 
       case 1:
-        return Center(child: Text('Category Tab'));
+        return CategoryPage();
 
       case 3:
         return Center(child: Text('Help Tab'));
