@@ -1,14 +1,15 @@
-import './constants.dart';
-import './model/categoryData.dart';
+import '../ankan/constants.dart';
+import '../ankan/model/categoryData.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class CategoryPage extends StatelessWidget {
+  static final routeName = 'category';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Container(),
+        // leading: Container(),
         title: Text('Category'),
         backgroundColor: Colors.green,
         centerTitle: true,
@@ -32,7 +33,7 @@ class CategoryPage extends StatelessWidget {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(16),
                             image: DecorationImage(
-                              image: AssetImage(categories[index-1].image),
+                              image: AssetImage(categories[index - 1].image),
                               fit: BoxFit.fill,
                             ),
                           ),
@@ -40,11 +41,11 @@ class CategoryPage extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text(
-                                categories[index-1].name,
+                                categories[index - 1].name,
                                 style: kTitleTextStyle,
                               ),
                               Text(
-                                '${categories[index-1].numOfShops} Shops',
+                                '${categories[index - 1].numOfShops} Shops',
                                 style: TextStyle(
                                   color: kTextColor.withOpacity(.5),
                                 ),

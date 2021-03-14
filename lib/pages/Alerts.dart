@@ -12,7 +12,7 @@ class _AlertsState extends State<Alerts> {
       appBar: AppBar(
         title: Text('Alerts'),
         centerTitle: true,
-        leading: Container(),
+        // leading: Container(),
       ),
       body: ListView.builder(
         physics: BouncingScrollPhysics(),

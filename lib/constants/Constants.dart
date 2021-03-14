@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:pre_project/pradeep/pages/ProductDetails.dart';
-import 'package:pre_project/pradeep/pages/SeeAll.dart';
+import 'package:pre_project/data/Product.dart';
+import 'package:pre_project/pages/ProductDetails.dart';
+import 'package:pre_project/pages/SeeAll.dart';
 
 class Constants {
   static Widget categoryButton(
       {@required String category, BuildContext context}) {
-    return FlatButton(
+    return TextButton(
       onPressed: () {
         Navigator.push(
             context,
@@ -15,53 +16,62 @@ class Constants {
                       type: category,
                     )));
       },
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topRight: Radius.circular(100),
-          bottomRight: Radius.circular(100),
-        ),
-      ),
-      color: Colors.white,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(
-              left: 10,
+      style: ButtonStyle(
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(100),
+              bottomRight: Radius.circular(100),
             ),
-            child: Text(
-              category,
-              style: TextStyle(
-                color: Color(0xFF5600E8),
+          ),
+        ),
+        overlayColor: MaterialStateProperty.all(Colors.yellowAccent),
+        backgroundColor: MaterialStateProperty.all(Colors.white),
+        padding: MaterialStateProperty.all(EdgeInsets.all(0.0)),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 10,
+              ),
+              child: Text(
+                category,
+                style: TextStyle(
+                  color: Color(0xFF5600E8),
+                ),
               ),
             ),
-          ),
-          Icon(
-            Icons.arrow_forward,
-            color: Color(0xFF5600E8),
-            // color: Colors.green,
-          ),
-        ],
+            Icon(
+              Icons.arrow_forward,
+              color: Color(0xFF5600E8),
+              // color: Colors.green,
+            ),
+          ],
+        ),
       ),
     );
   }
 
   //Main Product Card USed for every product
-  static Widget productCard() {
+  static Widget productCard({@required List<Product> product}) {
     return SizedBox(
       height: 145,
       child: ListView.builder(
         physics: ClampingScrollPhysics(),
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
-        itemCount: 11,
+        itemCount: product.length,
         itemBuilder: (BuildContext context, int index) => Card(
           // color: Color(0xFFFFFCD1),
           child: Container(
             width: 130,
             child: Center(
               child: productCardItem(
-                  context: context, product: Constants.products[index]),
+                  context: context, product: product[index]),
             ),
           ),
         ),
@@ -71,8 +81,9 @@ class Constants {
 
 //Item for productcard
   static Widget productCardItem(
-      {List<String> product, bool fromFull = false, BuildContext context}) {
+      {Product product, bool fromFull = false, BuildContext context}) {
     return RawMaterialButton(
+      hoverColor: Colors.lightGreenAccent,
       onPressed: () {
         Navigator.pushNamed(context, ProductDetails.id);
       },
@@ -84,7 +95,7 @@ class Constants {
                   child: Padding(
                     padding: const EdgeInsets.all(2.0),
                     child: Image.network(
-                      product[0],
+                      product.imgURL[0],
                       fit: BoxFit.contain,
                     ),
                   ),
@@ -95,13 +106,13 @@ class Constants {
                   child: Padding(
                     padding: const EdgeInsets.all(2.0),
                     child: Image.network(
-                      product[0],
+                      product.imgURL[0],
                       fit: BoxFit.contain,
                     ),
                   ),
                 ),
           SizedBox(height: 4),
-          Center(child: Text(product[1])),
+          Center(child: Text(product.name)),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             child: Row(
@@ -137,7 +148,7 @@ class Constants {
                     ),
                   ),
                 ),
-                Text(product[2])
+                Text('${product.price}'),
               ],
             ),
           ),
@@ -167,7 +178,7 @@ class Constants {
                   child: CircleAvatar(
                     radius: 40.0,
                     backgroundImage: NetworkImage(
-                        'https://tekrabuilders.com/wp-content/uploads/2018/12/male-placeholder-image.jpeg'),
+                        'https://avatars.services.sap.com/images/jolanta.gniadek_small.png'),
                   ),
                 ),
               ),
@@ -183,10 +194,10 @@ class Constants {
       {List<String> product, bool fromFull = false, BuildContext context}) {
     return Padding(
       padding: EdgeInsets.all(10.0),
-      child: RaisedButton(
+      child: OutlinedButton(
         onPressed: () {},
         //elevation: 8.0,
-        color: Colors.white,
+        // color: Colors.white,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
@@ -214,67 +225,67 @@ class Constants {
 
   static final List<List<String>> products = [
     [
-      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM8oE5gpw4fs_EdFLXESrR88AOx4y6a2SawQ&usqp=CAU',
       'Product Name',
       '₹X',
       'Rating'
     ],
     [
-      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM8oE5gpw4fs_EdFLXESrR88AOx4y6a2SawQ&usqp=CAU',
       'Product Name',
       '₹X',
       'Rating'
     ],
     [
-      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM8oE5gpw4fs_EdFLXESrR88AOx4y6a2SawQ&usqp=CAU',
       'Product Name',
       '₹X',
       'Rating'
     ],
     [
-      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM8oE5gpw4fs_EdFLXESrR88AOx4y6a2SawQ&usqp=CAU',
       'Product Name',
       '₹X',
       'Rating'
     ],
     [
-      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM8oE5gpw4fs_EdFLXESrR88AOx4y6a2SawQ&usqp=CAU',
       'Product Name',
       '₹X',
       'Rating'
     ],
     [
-      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM8oE5gpw4fs_EdFLXESrR88AOx4y6a2SawQ&usqp=CAU',
       'Product Name',
       '₹X',
       'Rating'
     ],
     [
-      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM8oE5gpw4fs_EdFLXESrR88AOx4y6a2SawQ&usqp=CAU',
       'Product Name',
       '₹X',
       'Rating'
     ],
     [
-      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM8oE5gpw4fs_EdFLXESrR88AOx4y6a2SawQ&usqp=CAU',
       'Product Name',
       '₹X',
       'Rating'
     ],
     [
-      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM8oE5gpw4fs_EdFLXESrR88AOx4y6a2SawQ&usqp=CAU',
       'Product Name',
       '₹X',
       'Rating'
     ],
     [
-      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM8oE5gpw4fs_EdFLXESrR88AOx4y6a2SawQ&usqp=CAU',
       'Product Name',
       '₹X',
       'Rating'
     ],
     [
-      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM8oE5gpw4fs_EdFLXESrR88AOx4y6a2SawQ&usqp=CAU',
       'Product Name',
       '₹X',
       'Rating'
@@ -283,7 +294,7 @@ class Constants {
 
   static List<List<String>> categoryData = [
     [
-      'https://www.seekpng.com/png/detail/894-8942715_fruits-amp-vegetables-clipart-png-fruit-vegetable-png.png',
+      'https://img.pngio.com/fruit-basket-png-png-collections-at-sccprecat-fruit-basket-png-800_800.png',
       'Fruits'
     ],
     [
@@ -303,51 +314,51 @@ class Constants {
       'Dry Fruits'
     ],
     [
-      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM8oE5gpw4fs_EdFLXESrR88AOx4y6a2SawQ&usqp=CAU',
       'Dummy1'
     ],
     [
-      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM8oE5gpw4fs_EdFLXESrR88AOx4y6a2SawQ&usqp=CAU',
       'Dummy2'
     ],
     [
-      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM8oE5gpw4fs_EdFLXESrR88AOx4y6a2SawQ&usqp=CAU',
       'Dummy3'
     ],
     [
-      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM8oE5gpw4fs_EdFLXESrR88AOx4y6a2SawQ&usqp=CAU',
       'Dummy4'
     ],
     [
-      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM8oE5gpw4fs_EdFLXESrR88AOx4y6a2SawQ&usqp=CAU',
       'Dummy5'
     ],
     [
-      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM8oE5gpw4fs_EdFLXESrR88AOx4y6a2SawQ&usqp=CAU',
       'Dummy6'
     ],
     [
-      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM8oE5gpw4fs_EdFLXESrR88AOx4y6a2SawQ&usqp=CAU',
       'Dummy7'
     ],
     [
-      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM8oE5gpw4fs_EdFLXESrR88AOx4y6a2SawQ&usqp=CAU',
       'Dummy8'
     ],
     [
-      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM8oE5gpw4fs_EdFLXESrR88AOx4y6a2SawQ&usqp=CAU',
       'Dummy9'
     ],
     [
-      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM8oE5gpw4fs_EdFLXESrR88AOx4y6a2SawQ&usqp=CAU',
       'Dummy10'
     ],
     [
-      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM8oE5gpw4fs_EdFLXESrR88AOx4y6a2SawQ&usqp=CAU',
       'Dummy11'
     ],
     [
-      'https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM8oE5gpw4fs_EdFLXESrR88AOx4y6a2SawQ&usqp=CAU',
       'Dummy12'
     ],
     [

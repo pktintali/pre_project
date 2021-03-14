@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "271056332718",
+    "project_id": "dsc-noticeboard",
+    "storage_bucket": "dsc-noticeboard.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:271056332718:android:9ed54f1f0c2534cba5ca3f",
+        "android_client_info": {
+          "package_name": "com.tdevelopers.dsc_noticeboard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "271056332718-h184j9fuo3jeqt088c474qflqa52bnhc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoEx97SL2N_UPznBS8qih9w8N8CYhcKDI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "271056332718-h184j9fuo3jeqt088c474qflqa52bnhc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
