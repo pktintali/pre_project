@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class RatingIcon extends StatelessWidget {
+  // final double rating;
+
+  // const RatingIcon({Key key,@required this.rating}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(

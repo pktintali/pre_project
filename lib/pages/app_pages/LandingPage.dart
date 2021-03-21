@@ -1,9 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pre_project/index.dart';
-import 'package:pre_project/pages/login_page.dart';
+import 'package:pre_project/pages/app_pages/homepage_loading.dart';
+import 'package:pre_project/pages/auth_related/login_page.dart';
 
 class LandingPage extends StatelessWidget {
+  static const routeName = '/';
   @override
   Widget build(BuildContext context) {
     CollectionReference users =
@@ -22,7 +24,6 @@ class LandingPage extends StatelessWidget {
                   if (snapshot.hasError) {
                     return Text("Something went wrong");
                   }
-
                   if (snapshot.connectionState == ConnectionState.done) {
                     Map<String, dynamic> data = snapshot.data.data();
                     print("Full Name: ${data['name']} ${data['userID']}");
@@ -39,15 +40,11 @@ class LandingPage extends StatelessWidget {
                         isUPI: data['isUPI'] ?? false,
                         language: data['language'] ?? 'NAN',
                         userID: data['userID'] ?? 'NAN',
-                        vendorRating: data['vendorRating'] ?? 'NAN');
+                        vendorRating: data['vendorRating'] ?? "");
                     userData.updateUser(u);
                     return MainHomePage();
                   }
-                  return Scaffold(
-                    body: Center(
-                      child: CircularProgressIndicator.adaptive(),
-                    ),
-                  );
+                  return HomePageLoadingScreen(loadingMessage: 'Loading...');
                 },
               );
       });

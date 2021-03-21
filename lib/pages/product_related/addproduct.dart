@@ -4,11 +4,11 @@ import 'package:image_picker/image_picker.dart';
 import 'package:pre_project/Providers/pradeep/current_product.dart';
 import 'package:pre_project/firebase/firebase.dart';
 import 'package:pre_project/index.dart';
+import 'package:pre_project/utils/platform_checker.dart';
 import 'package:provider/provider.dart';
 
 class AddProduct extends StatefulWidget {
   static const routename = '/addProduct';
-
   @override
   _AddProductState createState() => _AddProductState();
 }
@@ -23,7 +23,8 @@ class _AddProductState extends State<AddProduct> {
   String _category;
   String _brand;
   String _description;
-  String _tags;
+  List<dynamic> _tags;
+  GeoPoint vGeo;
   List<String> _imageURLS = [];
   final picker = ImagePicker();
   List<Widget> _images = [];
@@ -131,7 +132,7 @@ class _AddProductState extends State<AddProduct> {
                                 border: OutlineInputBorder(),
                               ),
                               onChanged: (v) {
-                                _price = int.parse(v);
+                                _quantity = v;
                               },
                             ),
                           ),
@@ -147,18 +148,19 @@ class _AddProductState extends State<AddProduct> {
                               },
                             ),
                           ),
-                          Card(
-                            child: TextField(
-                              decoration: InputDecoration(
-                                labelText: ' Category ',
-                                hintText: ' Category',
-                                border: OutlineInputBorder(),
-                              ),
-                              onChanged: (v) {
-                                _category = v;
-                              },
-                            ),
-                          ),
+                          // Card(
+                          //   child: TextField(
+                          //     decoration: InputDecoration(
+                          //       labelText: ' Category ',
+                          //       hintText: ' Category',
+                          //       border: OutlineInputBorder(),
+                          //     ),
+                          //     onChanged: (v) {
+                          //       _category = v;
+                          //     },
+                          //   ),
+                          // ),
+                          myCategoryInput(),
                           Card(
                             child: TextField(
                               decoration: InputDecoration(
@@ -196,7 +198,7 @@ class _AddProductState extends State<AddProduct> {
                                 hintText: ' Enter Tags Seperated by ,',
                               ),
                               onChanged: (v) {
-                                _tags = v;
+                                _tags.add(v);
                               },
                             ),
                           ),
@@ -269,9 +271,10 @@ class _AddProductState extends State<AddProduct> {
                                       tags: _tags,
                                       imageURLS: _imageURLS,
                                       location: userData.user.address,
+                                      vendorGeo: userData.user.geoPoint,
                                       vendor: userData.user.email,
                                       vendorName: userData.user.name,
-                                      phone: userData.user.phones[0],
+                                      phones: userData.user.phones,
                                     );
                                     Navigator.pop(context);
                                   },
@@ -302,6 +305,55 @@ class _AddProductState extends State<AddProduct> {
     );
   }
 
+  Widget myCategoryInput() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: DropdownButton(
+        itemHeight: 60,
+        hint: Text('Select a Category'),
+        isExpanded: true,
+        value: _category,
+        onChanged: (v) {
+          _category = v;
+          print(v);
+          setState(() {});
+        },
+        items: [
+          DropdownMenuItem(
+            child: Text('Vegetables'),
+            value: 'Vegetables',
+            onTap: () {},
+          ),
+          DropdownMenuItem(
+            child: Text('Fruits'),
+            value: 'Fruits',
+            onTap: () {},
+          ),
+          DropdownMenuItem(
+            child: Text('Household'),
+            value: 'Household',
+            onTap: () {},
+          ),
+          DropdownMenuItem(
+            child: Text('Drinks'),
+            value: 'Drinks',
+            onTap: () {},
+          ),
+          DropdownMenuItem(
+            child: Text('Dry Fruits'),
+            value: 'Dry Fruits',
+            onTap: () {},
+          ),
+          DropdownMenuItem(
+            child: Text('Others'),
+            value: 'Others',
+            onTap: () {},
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget bottumSheet(CurrentProduct data) {
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -320,66 +372,69 @@ class _AddProductState extends State<AddProduct> {
                 child: Text('Close')),
           ),
         ),
-        Row(
-          children: [
-            Expanded(
-              child: TextButton(
-                onPressed: () async {
-                  data.toogleUploading();
-                  await getImage(fromCamera: true);
-                  Navigator.pop(context);
-                  String s = await FirebaseWork().uploadFile(_image);
-                  _imageURLS.add(s);
-                  data.toogleUploading();
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(13.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.camera_alt, color: Colors.red),
-                      SizedBox(width: 8),
-                      Text('Camera', style: TextStyle(color: Colors.red)),
-                    ],
+        !PlatformCheck.isDesktop(context)
+            ? Row(
+                children: [
+                  Expanded(
+                    child: TextButton(
+                      onPressed: () async {
+                        data.toogleUploading();
+                        await getImage(fromCamera: true);
+                        Navigator.pop(context);
+                        String s = await FirebaseWork().uploadFile(_image);
+                        _imageURLS.add(s);
+                        data.toogleUploading();
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(13.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.camera_alt, color: Colors.red),
+                            SizedBox(width: 8),
+                            Text('Camera', style: TextStyle(color: Colors.red)),
+                          ],
+                        ),
+                      ),
+                      style: ButtonStyle(
+                        padding: MaterialStateProperty.all(EdgeInsets.all(0.0)),
+                        backgroundColor: MaterialStateProperty.all(
+                            Colors.lightGreenAccent.shade100),
+                      ),
+                    ),
                   ),
-                ),
-                style: ButtonStyle(
-                  padding: MaterialStateProperty.all(EdgeInsets.all(0.0)),
-                  backgroundColor: MaterialStateProperty.all(
-                      Colors.lightGreenAccent.shade100),
-                ),
-              ),
-            ),
-            Expanded(
-              child: TextButton(
-                onPressed: () async {
-                  data.toogleUploading();
-                  await getImage(fromCamera: false);
-                  Navigator.pop(context);
-                  String s = await FirebaseWork().uploadFile(_image);
-                  _imageURLS.add(s);
-                  data.toogleUploading();
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(13.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.image, color: Colors.purple),
-                      SizedBox(width: 8),
-                      Text('Gallery', style: TextStyle(color: Colors.purple)),
-                    ],
+                  Expanded(
+                    child: TextButton(
+                      onPressed: () async {
+                        data.toogleUploading();
+                        await getImage(fromCamera: false);
+                        Navigator.pop(context);
+                        String s = await FirebaseWork().uploadFile(_image);
+                        _imageURLS.add(s);
+                        data.toogleUploading();
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(13.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.image, color: Colors.purple),
+                            SizedBox(width: 8),
+                            Text('Gallery',
+                                style: TextStyle(color: Colors.purple)),
+                          ],
+                        ),
+                      ),
+                      style: ButtonStyle(
+                        padding: MaterialStateProperty.all(EdgeInsets.all(0.0)),
+                        backgroundColor: MaterialStateProperty.all(
+                            Colors.yellowAccent.shade100),
+                      ),
+                    ),
                   ),
-                ),
-                style: ButtonStyle(
-                  padding: MaterialStateProperty.all(EdgeInsets.all(0.0)),
-                  backgroundColor:
-                      MaterialStateProperty.all(Colors.yellowAccent.shade100),
-                ),
-              ),
-            ),
-          ],
-        ),
+                ],
+              )
+            : Text('Image Not Supported on Web and Desktop'),
       ],
     );
   }

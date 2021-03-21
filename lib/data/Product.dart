@@ -6,23 +6,37 @@ class Product {
   final String description;
   final String id;
   final int price;
+  final String category;
   final String vendor;
-  final String tags;
+  final List<dynamic> tags;
+  final String vendorName;
   final List<dynamic> imgURL;
   final Timestamp timeStamp;
   final String vendorLocation;
+  final GeoPoint vendorGeo;
   final String phone;
+  final String explainPrice;
+  final String brand;
+  final String quantitity;
+  final String dicsount;
   Product({
     this.name,
     this.description,
     this.id,
     this.price,
+    this.brand,
+    this.dicsount,
     this.vendor,
     this.tags,
     this.imgURL,
+    this.quantitity,
+    this.vendorGeo,
+    this.category,
     this.timeStamp,
     this.vendorLocation,
     this.phone,
+    this.explainPrice,
+    this.vendorName,
   });
 
   Product copyWith({
@@ -31,10 +45,17 @@ class Product {
     String id,
     int price,
     String vendor,
-    String tags,
+    List<String> tags,
+    String brand,
+    int quantitity,
+    String discount,
+    GeoPoint vendorGeo,
     List<String> imgURL,
     Timestamp timeStamp,
     String phone,
+    String explainPrice,
+    String vendorName,
+    String category,
   }) {
     return Product(
       name: name ?? this.name,
@@ -45,6 +66,7 @@ class Product {
       tags: tags ?? this.tags,
       imgURL: imgURL ?? this.imgURL,
       timeStamp: timeStamp ?? this.timeStamp,
+      explainPrice: explainPrice ?? this.explainPrice,
     );
   }
 

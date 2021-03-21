@@ -1,85 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:pre_project/Providers/pradeep/UserData.dart';
+import 'package:pre_project/pages/app_pages/search_page.dart';
 import 'package:pre_project/widgets/myDrawer.dart';
 import 'package:pre_project/constants/Constants.dart';
 import 'package:pre_project/widgets/CategoryView.dart';
 import 'package:pre_project/widgets/product_list.dart';
+import 'package:provider/provider.dart';
 
-class Home extends StatefulWidget {
+class Home extends StatelessWidget {
   static const id = "homePage";
-  @override
-  _HomeState createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  Color _bgColor = Color(0xFFEDFDEC);
-  Color mainColor = Colors.green;
-
+  final Color _bgColor = Color(0xFFEDFDEC);
+  final Color mainColor = Colors.green;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: mainColor,
       drawer: MyDrawer(),
+      appBar: AppBar(
+        title: Text('Welcome ${Provider.of<UserData>(context).user.name}'),
+        centerTitle: true,
+        actions: [
+          IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+                Navigator.pushNamed(context, SearchPage.routeName);
+              }),
+        ],
+      ),
       key: _scaffoldKey,
       body: SafeArea(
         child: Container(
           height: MediaQuery.of(context).size.height,
           child: Stack(
             children: <Widget>[
-              Positioned(
-                top: 20.0,
-                left: 0.0,
-                right: 0.0,
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 5.0),
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: mainColor,
-                          spreadRadius: 0.5,
-                          blurRadius: 0.8,
-                        ),
-                      ],
-                      borderRadius: BorderRadius.circular(5.0),
-                      color: Colors.white,
-                    ),
-                    child: Row(
-                      children: [
-                        IconButton(
-                          icon: Icon(
-                            Icons.menu,
-                            color: mainColor,
-                          ),
-                          onPressed: () {
-                            _scaffoldKey.currentState.openDrawer();
-                          },
-                        ),
-                        Expanded(
-                          child: TextField(
-                            decoration: InputDecoration(
-                              hintText: "Search",
-                              contentPadding: EdgeInsets.all(5.0),
-                              enabledBorder: InputBorder.none,
-                              disabledBorder: InputBorder.none,
-                              border: InputBorder.none,
-                            ),
-                          ),
-                        ),
-                        IconButton(
-                          icon: Icon(
-                            Icons.search,
-                            color: mainColor,
-                          ),
-                          onPressed: () {},
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
               Padding(
-                padding: const EdgeInsets.only(top: 75),
+                padding: const EdgeInsets.only(top: 0.0),
                 child: Container(
                   decoration: BoxDecoration(
                     color: _bgColor,
@@ -97,8 +53,8 @@ class _HomeState extends State<Home> {
                             data: Constants.categoryData,
                             wide: false),
                         Constants.categoryButton(
-                            category: 'Featured Products', context: context),
-                        ProductList(type: 'featured'),
+                            category: 'Newly Added', context: context),
+                        ProductList(type: 'Newly Added'),
                         Constants.categoryButton(
                             category: 'Recommended Products', context: context),
                         ProductList(),
@@ -130,11 +86,7 @@ class _HomeState extends State<Home> {
                                 color: Color(0xFF5600E8),
                               ),
                             ),
-                            onPressed: () {
-                              // setState(() {
-                              //   _loadCount++;
-                              // });
-                            },
+                            onPressed: () {},
                           ),
                         ),
                         SizedBox(height: 30),

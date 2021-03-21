@@ -1,5 +1,5 @@
-import '../ankan/constants.dart';
-import '../ankan/model/categoryData.dart';
+import '../../ankan/constants.dart';
+import '../../ankan/model/categoryData.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 

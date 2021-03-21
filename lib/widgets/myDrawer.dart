@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:pre_project/index.dart';
-import 'package:pre_project/pages/categoryPage.dart';
-import 'package:pre_project/pages/addproduct.dart';
+import 'package:pre_project/pages/tabbar_pages/categoryPage.dart';
+import 'package:pre_project/pages/product_related/addproduct.dart';
 import 'package:pre_project/utils/platform_checker.dart';
 import 'package:provider/provider.dart';
 import 'package:pre_project/auth/auth_manager.dart';
@@ -23,20 +23,18 @@ class _MyDrawerState extends State<MyDrawer> {
             builder: (context, data, __) {
               if (data.user != null) {
                 return UserAccountsDrawerHeader(
-                  accountEmail: Text(data.user.email),
-                  accountName: Text(data.user.name),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [Colors.green, Colors.yellow],
+                    accountEmail: Text(data.user.email),
+                    accountName: Text(data.user.name),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [Colors.green, Colors.yellow],
+                      ),
+                      color: Colors.green,
                     ),
-                    color: Colors.green,
-                  ),
-                  currentAccountPicture: CircleAvatar(
-                    backgroundColor: Colors.grey,
-                    backgroundImage: NetworkImage(
-                        'https://yt3.ggpht.com/a/AATXAJwpODycP3kKW-pRyGxhhoO9zsO9z54KS1xWsTVB9Q=s240-c-k-c0xffffffff-no-rj-mo'),
-                  ),
-                );
+                    currentAccountPicture: CircleAvatar(
+                      backgroundColor: Colors.grey,
+                      backgroundImage: AssetImage('assets/images/dsc_logo.jpg'),
+                    ));
               } else {
                 return SizedBox();
               }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pre_project/data/Product.dart';
 import 'package:pre_project/index.dart';
-import 'package:pre_project/pages/ProductDetails.dart';
 import 'package:pre_project/utils/platform_checker.dart';
 import 'package:pre_project/widgets/rating_icon.dart';
 import 'package:provider/provider.dart';
@@ -9,7 +8,11 @@ import 'package:provider/provider.dart';
 class ProductCardItem extends StatelessWidget {
   final Product product;
   final bool fromFull;
-  const ProductCardItem({Key key, this.product, this.fromFull = false})
+  const ProductCardItem(
+      {Key key,
+      this.product,
+      this.fromFull = false,
+     })
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -18,17 +21,16 @@ class ProductCardItem extends StatelessWidget {
     return Consumer<CurrentProduct>(
       builder: (context, data, _) => RawMaterialButton(
         hoverColor: Colors.lightGreenAccent,
-        
         onPressed: () {
           data.addProduct(prod: product);
           print(data.product.name);
-          Navigator.pushNamed(context, ProductDetails.id);
+          Navigator.pushNamed(context, 'products/${data.product.id}');
         },
         child: Column(
           children: [
             fromFull
                 ? Container(
-                    height: _mdqh > _mdqw ? _mdqh / 4 : _mdqh / 2,
+                    height: _mdqh > _mdqw ? _mdqh / 4 : _mdqh / 3,
                     child: Padding(
                       padding: const EdgeInsets.all(2.0),
                       child: Image.network(
@@ -55,8 +57,12 @@ class ProductCardItem extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  Text('₹ ${product.price}',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 18,
+                      )),
                   RatingIcon(),
-                  Text('${product.price}'),
                 ],
               ),
             ),

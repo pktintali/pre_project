@@ -6,7 +6,7 @@ class CurrentProduct with ChangeNotifier {
   bool uploading = false;
   void addProduct({@required Product prod}) {
     product = prod;
-    notifyListeners();
+    // notifyListeners();
   }
 
   void toogleUploading() {

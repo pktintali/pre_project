@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pre_project/data/Product.dart';
-import 'package:pre_project/pages/ProductDetails.dart';
-import 'package:pre_project/pages/SeeAll.dart';
+import 'package:pre_project/pages/app_pages/SeeAll.dart';
 
 class Constants {
   static Widget categoryButton(
@@ -70,8 +69,7 @@ class Constants {
           child: Container(
             width: 130,
             child: Center(
-              child: productCardItem(
-                  context: context, product: product[index]),
+              child: productCardItem(context: context, product: product[index]),
             ),
           ),
         ),
@@ -85,7 +83,7 @@ class Constants {
     return RawMaterialButton(
       hoverColor: Colors.lightGreenAccent,
       onPressed: () {
-        Navigator.pushNamed(context, ProductDetails.id);
+        Navigator.pushNamed(context, '${product.id}');
       },
       child: Column(
         children: [

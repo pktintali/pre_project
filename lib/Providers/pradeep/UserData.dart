@@ -12,4 +12,9 @@ class UserData with ChangeNotifier {
     user = null;
     notifyListeners();
   }
+
+  void falseRefresh(MyUser u) {
+    user = u;
+    notifyListeners();
+  }
 }

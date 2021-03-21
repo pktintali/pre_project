@@ -10,6 +10,8 @@ void main() async {
         ChangeNotifierProvider(create: (_) => UserData()),
         ChangeNotifierProvider(create: (_) => MyTheme()),
         ChangeNotifierProvider(create: (_) => CurrentProduct()),
+        ChangeNotifierProvider(create: (_) => AuthField()),
+        
       ],
       child: MyApp(),
     ),

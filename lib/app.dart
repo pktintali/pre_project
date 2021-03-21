@@ -1,3 +1,4 @@
+import 'package:pre_project/routes/route_manager.dart';
 import 'index.dart';
 
 class MyApp extends StatelessWidget {
@@ -5,31 +6,23 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => TabData()),
         Provider<AuthManager>(
-          create: (_) => AuthManager(FirebaseAuth.instance),
-        ),
+            create: (_) => AuthManager(FirebaseAuth.instance)),
         StreamProvider(
           create: (context) => context.read<AuthManager>().authStateChange,
           initialData: null,
         ),
       ],
       child: MaterialApp(
-        // initialRoute: data.user!=null ? MainHomePage.id:LoginPage.routename,
-        routes: {
-          LoginPage.routename: (context) => LoginPage(),
-          SignUp.routename: (context) => SignUp(),
-          MainHomePage.id: (context) => MainHomePage(),
-          Home.id: (context) => Home(),
-          LandingProfile.routename: (context) => LandingProfile(),
-          ProductDetails.id: (context) => ProductDetails(),
-          VendorProfile.routename: (context) => VendorProfile(),
-          AddProduct.routename: (context) => AddProduct(),
-          CategoryPage.routeName: (context) => CategoryPage(),
-        },
+        initialRoute: RouteManager.initialRoute,
+        routes: RouteManager.routes(context),
+        onUnknownRoute: (settings) =>
+            RouteManager.onUnknownRoute(context, settings: settings),
         debugShowCheckedModeBanner: false,
         theme: ThemeData().copyWith(primaryColor: Colors.green),
         title: 'Pre Project',
-        home: LandingPage(),
+        // home: LandingPage(),
       ),
     );
   }

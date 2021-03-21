@@ -14,7 +14,15 @@ class FirebaseWork {
       {@required String name,
       @required String email,
       @required String mobileNo,
+      String address,
+      GeoPoint gp,
       bool isSeller = false}) async {
+    print(name);
+    print(email);
+    print(mobileNo);
+    print(address);
+    print(gp);
+    print(isSeller);
     // Call the user's CollectionReference to add a new user
     return await users
         .doc('$email')
@@ -22,7 +30,9 @@ class FirebaseWork {
           'name': name,
           'userID': email,
           'phones': [mobileNo],
-          'isVendor': isSeller
+          'isVendor': isSeller,
+          'address': address ?? 'NAN',
+          'geopoint': gp ?? 'NAN',
         })
         .then((value) => print("User Added"))
         .catchError((error) => print("Failed to add user: $error"));
@@ -51,9 +61,10 @@ class FirebaseWork {
       List<String> imageURLS,
       String location,
       String vendor,
+      GeoPoint vendorGeo,
       String vendorName,
-      String phone,
-      String tags}) {
+      List phones,
+      List<dynamic> tags}) {
     return products
         .add({
           'name': name ?? '',
@@ -66,14 +77,42 @@ class FirebaseWork {
           'description': description ?? '',
           'tags': tags,
           'vendorLocation': location ?? '',
+          'vendorGeo': vendorGeo,
           'addedOn': DateTime.now(),
           'imgURLS': imageURLS,
           'vendor': vendor,
           'vendorName': vendorName,
-          'phones': phone??'',
+          'phones': phones ?? '',
         })
         .then((value) => print(value.id))
         .catchError((error) => print("Failed to add user: $error"));
+  }
+
+  Future<void> updateUser(
+      {String name,
+      @required String email,
+      List mobileNo,
+      String about,
+      bool upi,
+      String language,
+      String address,
+      GeoPoint gPoint}) async {
+    // Call the user's CollectionReference to add a new user
+    return await users
+        .doc('$email')
+        .update(
+          {
+            'name': name,
+            'phones': mobileNo,
+            'about': about,
+            'isUPI': upi,
+            'language': language,
+            'address': address,
+            'geopoint': gPoint
+          },
+        )
+        .then((value) => print("User Updated"))
+        .catchError((error) => print("Failed to Update user: $error"));
   }
 
   Future<String> uploadFile(File f) async {

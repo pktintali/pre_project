@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:pre_project/constants/Constants.dart';
 import 'package:pre_project/data/Product.dart';
 import 'package:pre_project/widgets/productCardItem.dart';
 
@@ -74,21 +73,30 @@ class _CategoryViewState extends State<CategoryView> {
         FirebaseFirestore.instance.collection('products');
     final orientation = MediaQuery.of(context).orientation;
     return FutureBuilder(
-        future: products.get(),
+        future: categoryFuture(products),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done &&
               snapshot.hasData) {
             if (_product.length <= 0) {
               snapshot.data.docs.forEach((doc) {
                 Product p = new Product(
-                    // id: doc["id"],
-                    description: doc["description"],
-                    price: doc["price"],
-                    // vendor: doc["vendor"],
-                    name: doc["name"],
-                    // timeStamp: doc["addedOn"].toString(),
-                    imgURL: doc["imgURLS"],
-                    tags: doc["tags"]);
+                    id: doc.id,
+                    description: doc.data()["description"] ?? '',
+                    price: doc.data()["price"] ?? 0,
+                    vendor: doc["vendor"] ?? '',
+                    vendorName: doc['vendorName'],
+                    name: doc.data()["name"] ?? '',
+                    timeStamp: doc["addedOn"] ?? 'NAN',
+                    imgURL: doc.data()["imgURLS"],
+                    brand: doc.data()['brand'] ?? 'NAN',
+                    category: doc.data()['category'] ?? 'Others',
+                    explainPrice: doc.data()['priceDescription'] ?? 'NAN',
+                    phone: doc.data()['phones'][0],
+                    dicsount: doc.data()['discount']??'NAN',
+                    quantitity: doc.data()['quantitity'] ?? 'NAN',
+                    vendorGeo: doc.data()['vendorGeo'],
+                    vendorLocation: doc.data()['vendorLocation'] ?? 'NAN',
+                    tags: doc.data()["tags"] ?? ['NAN']);
                 print(p.id);
                 _product.add(p);
               });
@@ -102,37 +110,23 @@ class _CategoryViewState extends State<CategoryView> {
                 physics: BouncingScrollPhysics(),
                 // crossAxisSpacing: 20,
                 // mainAxisSpacing: 20,
-                //TODO: Fix for all items currentls missing nth item
-                staggeredTileBuilder: (index) => StaggeredTile.fit(index != 0
+                // TODO: Fix hack for tiles item
+                staggeredTileBuilder: (index) => StaggeredTile.fit(index != 200
                     ? 1
                     : (orientation == Orientation.portrait)
                         ? 2
                         : 4),
-                itemBuilder: (BuildContext context, int index) => index == 0
-                    ? Container(
-                        color: Color(0xFFEDFDEC),
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text('Top ${widget.type} sellers'),
-                            SizedBox(height: 10),
-                            Constants.sellerCard(),
-                          ],
-                        ),
-                      )
-                    : Card(
-                        child: Container(
-                          width: 130,
-                          child: Center(
-                            child: ProductCardItem(
-                              fromFull: true,
-                              product: _product[index - 1],
-                            ),
-                          ),
-                        ),
+                itemBuilder: (BuildContext context, int index) => Card(
+                  child: Container(
+                    width: 130,
+                    child: Center(
+                      child: ProductCardItem(
+                        fromFull: true,
+                        product: _product[index],
                       ),
+                    ),
+                  ),
+                ),
               ),
             );
           } else {
@@ -141,5 +135,22 @@ class _CategoryViewState extends State<CategoryView> {
             );
           }
         });
+  }
+
+  Future categoryFuture(CollectionReference product) {
+    switch (widget.type) {
+      case 'Fruits':
+        return product.where('category', isEqualTo: 'Fruits').get();
+      case 'Vegetables':
+        return product.where('category', isEqualTo: 'Vegetables').get();
+      case 'Drinks':
+        return product.where('category', isEqualTo: 'Drinks').get();
+      case 'Household':
+        return product.where('category', isEqualTo: 'Household').get();
+      case 'Dry Fruits':
+        return product.where('category', isEqualTo: 'Dry Fruits').get();
+      default:
+        return product.limit(15).get();
+    }
   }
 }
