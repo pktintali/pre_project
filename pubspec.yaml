@@ -36,6 +36,7 @@ dependencies:
   pull_to_refresh: ^1.6.4
   flutter_image_compress: ^0.7.0
   geocoder: ^0.2.1
+  shimmer: ^1.1.2
 
 dev_dependencies:
   flutter_test:

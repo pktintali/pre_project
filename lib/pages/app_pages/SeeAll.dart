@@ -29,7 +29,7 @@ class SeeAll extends StatelessWidget {
         return FutureBuilder(
             future: userProducts
                 ? products.where('vendor', isEqualTo: _vID).get()
-                : products.get(),
+                : _myFuture(products, type: type),
             builder: (context, snapshot) {
               print(data.user.email);
               if (snapshot.connectionState == ConnectionState.done &&
@@ -50,9 +50,9 @@ class SeeAll extends StatelessWidget {
                         category: doc.data()['category'] ?? 'Others',
                         explainPrice: doc.data()['priceDescription'] ?? 'NAN',
                         phone: doc.data()['phones'][0],
-                        dicsount: doc.data()['discount']??'NAN',
+                        dicsount: doc.data()['discount'] ?? 'NAN',
                         vendorGeo: doc.data()['vendorGeo'],
-                        quantitity: doc.data()['quantitity']??'NAN',
+                        quantitity: doc.data()['quantitity'] ?? 'NAN',
                         vendorLocation: doc.data()['vendorLocation'] ?? 'NAN',
                         tags: doc.data()["tags"] ?? ['NAN']);
                     print(doc.id);
@@ -96,5 +96,57 @@ class SeeAll extends StatelessWidget {
             });
       }),
     );
+  }
+
+  
+  _myFuture(CollectionReference products, {String type, String category}) {
+    switch (type) {
+      case 'Newly Added':
+        return products.orderBy('addedOn', descending: true).limit(10).get();
+      case 'something':
+        return products
+            .limit(10)
+            .where('category', isEqualTo: 'Vegetables')
+            .get();
+      case 'area':
+        return products
+            .limit(10)
+            .where('vendor', isEqualTo: '4gpradeep@gmail.com')
+            .get();
+      case 'new':
+        return products
+            .limit(10)
+            .where('vendor', isEqualTo: '4gpradeep@gmail.com')
+            .get();
+      case 'Fruits you may like':
+        return products
+            .orderBy('addedOn', descending: true)
+            .limit(10)
+            .where('category', isEqualTo: 'Fruits')
+            .get();
+      case 'Vegetables for You':
+        return products
+            .orderBy('addedOn', descending: true)
+            .limit(10)
+            .where('category', isEqualTo: 'Vegetables')
+            .get();
+      case 'Drinks':
+        return products.limit(10).where('category', isEqualTo: 'Drinks').get();
+      case 'Households':
+        return products
+            .orderBy('addedOn', descending: true)
+            .limit(10)
+            .where('category', isEqualTo: 'Household')
+            .get();
+      case 'Fruits':
+        return products.limit(10).where('category', isEqualTo: 'Fruits').get();
+      case 'Electronics':
+        return products
+            .limit(10)
+            .where('category', isEqualTo: 'Electronics')
+            .get();
+      default:
+        return products.limit(10).get();
+    }
   }
 }

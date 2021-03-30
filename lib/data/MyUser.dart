@@ -15,6 +15,7 @@ class MyUser {
   final List phones;
   final String userID;
   final String vendorRating;
+  final List favs;
   MyUser({
     this.name,
     this.email,
@@ -26,6 +27,7 @@ class MyUser {
     this.language,
     this.phones,
     this.userID,
+    this.favs,
     this.vendorRating,
   });
 
@@ -41,6 +43,7 @@ class MyUser {
     List<int> phones,
     String userID,
     String vendorRating,
+    List favs,
   }) {
     return MyUser(
       name: name ?? this.name,

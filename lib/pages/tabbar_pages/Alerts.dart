@@ -1,11 +1,19 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-class Alerts extends StatefulWidget {
-  @override
-  _AlertsState createState() => _AlertsState();
-}
+class Alerts extends StatelessWidget {
+  final RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
 
-class _AlertsState extends State<Alerts> {
+  void _onRefresh() async {
+    // monitor network fetch
+    await Future.delayed(Duration(milliseconds: 1000));
+    // if failed,use refreshFailed()
+    print('Completed');
+    _refreshController.refreshCompleted();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,12 +22,39 @@ class _AlertsState extends State<Alerts> {
         centerTitle: true,
         // leading: Container(),
       ),
-      body: ListView.builder(
-        physics: BouncingScrollPhysics(),
-        itemCount: 20,
-        itemBuilder: (context, index) {
-          return index == 19 ? SizedBox(height: 30) : alerTtile();
-        },
+      body: SmartRefresher(
+        enablePullDown: true,
+        enablePullUp: false,
+        header: WaterDropMaterialHeader(),
+        // footer: CustomFooter(
+        //   builder: (BuildContext context, LoadStatus mode) {
+        //     Widget body;
+        //     if (mode == LoadStatus.idle) {
+        //       body = Text("pull up load");
+        //     } else if (mode == LoadStatus.loading) {
+        //       body = CupertinoActivityIndicator(radius: 15);
+        //     } else if (mode == LoadStatus.failed) {
+        //       body = Text("Load Failed!Click retry!");
+        //     } else if (mode == LoadStatus.canLoading) {
+        //       body = Text("release to load more");
+        //     } else {
+        //       body = Text("No more Data");
+        //     }
+        //     return Container(
+        //       height: 55.0,
+        //       child: Center(child: body),
+        //     );
+        //   },
+        // ),
+        controller: _refreshController,
+        onRefresh: _onRefresh,
+        child: ListView.builder(
+          physics: BouncingScrollPhysics(),
+          itemCount: 20,
+          itemBuilder: (context, index) {
+            return index == 19 ? SizedBox(height: 30) : alerTtile();
+          },
+        ),
       ),
     );
   }

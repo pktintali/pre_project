@@ -4,6 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:pre_project/Providers/pradeep/current_product.dart';
 import 'package:pre_project/firebase/firebase.dart';
 import 'package:pre_project/index.dart';
+import 'package:pre_project/utils/image_compresser.dart';
 import 'package:pre_project/utils/platform_checker.dart';
 import 'package:provider/provider.dart';
 
@@ -31,19 +32,26 @@ class _AddProductState extends State<AddProduct> {
   Future getImage({bool fromCamera}) async {
     final pickedFile = await picker.getImage(
         source: fromCamera ? ImageSource.camera : ImageSource.gallery);
-    setState(() {
-      if (pickedFile != null) {
-        _image = File(pickedFile.path);
-        print(_image);
-        _images.add(SizedBox(
-          child: Image.file(_image),
-          height: 120,
-          width: 120,
-        ));
-      } else {
-        print('No image selected.');
-      }
-    });
+
+    if (pickedFile != null) {
+      print("Path Is " + pickedFile.path);
+      File _tempImage = await Compresser.testCompressAndGetFile(
+          File(pickedFile.path),
+          '/data/user/0/com.tdevelopers.dsc_noticeboard/cache/compressed' +
+              DateTime.now().toString() +
+              '.jpg');
+      // _image = File(pickedFile.path);
+      _image = _tempImage;
+      print(_image);
+      _images.add(SizedBox(
+        child: Image.file(_image),
+        height: 120,
+        width: 120,
+      ));
+      setState(() {});
+    } else {
+      print('No image selected.');
+    }
   }
 
   @override

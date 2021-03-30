@@ -1,4 +1,3 @@
-import 'package:pre_project/routes/route_manager.dart';
 import 'index.dart';
 
 class MyApp extends StatelessWidget {

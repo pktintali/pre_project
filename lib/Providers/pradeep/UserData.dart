@@ -17,4 +17,9 @@ class UserData with ChangeNotifier {
     user = u;
     notifyListeners();
   }
+
+  void updateFavs(String id) {
+    user.favs.add(id);
+    notifyListeners();
+  }
 }

@@ -131,4 +131,16 @@ class FirebaseWork {
       // e.g, e.code == 'canceled'
     }
   }
+
+  Future<void> addToFavourite({String email, List fav}) async {
+    return await users
+        .doc('$email')
+        .update(
+          {
+            'favs': fav,
+          },
+        )
+        .then((value) => print("User Updated"))
+        .catchError((error) => print("Failed to Update user: $error"));
+  }
 }

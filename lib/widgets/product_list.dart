@@ -78,10 +78,10 @@ myFuture(CollectionReference products, {String type, String category}) {
   switch (type) {
     case 'Newly Added':
       return products.orderBy('addedOn', descending: true).limit(10).get();
-    case 'recommended':
+    case 'something':
       return products
           .limit(10)
-          .where('vendor', isEqualTo: '4gpradeep@gmail.com')
+          .where('category', isEqualTo: 'Vegetables')
           .get();
     case 'area':
       return products
@@ -94,16 +94,25 @@ myFuture(CollectionReference products, {String type, String category}) {
           .where('vendor', isEqualTo: '4gpradeep@gmail.com')
           .get();
     case 'Fruits':
-      return products.limit(10).where('category', isEqualTo: 'Fruits').get();
+      return products
+          .orderBy('addedOn', descending: true)
+          .limit(10)
+          .where('category', isEqualTo: 'Fruits')
+          .get();
     case 'Vegetables':
       return products
+          .orderBy('addedOn', descending: true)
           .limit(10)
           .where('category', isEqualTo: 'Vegetables')
           .get();
     case 'Drinks':
       return products.limit(10).where('category', isEqualTo: 'Drinks').get();
     case 'Household':
-      return products.limit(10).where('category', isEqualTo: 'Household').get();
+      return products
+          .orderBy('addedOn', descending: true)
+          .limit(10)
+          .where('category', isEqualTo: 'Household')
+          .get();
     case 'Fruits':
       return products.limit(10).where('category', isEqualTo: 'Fruits').get();
     case 'Electronics':

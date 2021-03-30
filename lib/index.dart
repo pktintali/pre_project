@@ -24,3 +24,4 @@ export 'package:pre_project/data/MyUser.dart';
 export 'package:pre_project/Providers/pradeep/tab_data.dart';
 export 'package:pre_project/pages/app_pages/search_page.dart';
 export 'package:pre_project/Providers/utils_provider/AuthFields.dart';
+export 'package:pre_project/routes/route_manager.dart';

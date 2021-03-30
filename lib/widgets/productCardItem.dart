@@ -8,12 +8,11 @@ import 'package:provider/provider.dart';
 class ProductCardItem extends StatelessWidget {
   final Product product;
   final bool fromFull;
-  const ProductCardItem(
-      {Key key,
-      this.product,
-      this.fromFull = false,
-     })
-      : super(key: key);
+  const ProductCardItem({
+    Key key,
+    this.product,
+    this.fromFull = false,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     double _mdqh = MediaQuery.of(context).size.height;
@@ -24,7 +23,8 @@ class ProductCardItem extends StatelessWidget {
         onPressed: () {
           data.addProduct(prod: product);
           print(data.product.name);
-          Navigator.pushNamed(context, 'products/${data.product.id}');
+          Navigator.pushNamed(context, 'products/${data.product.id}',
+              arguments: data.product.id);
         },
         child: Column(
           children: [
