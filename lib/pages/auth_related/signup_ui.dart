@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pre_project/Providers/utils_provider/AuthFields.dart';
@@ -248,7 +249,7 @@ class SignUpUI extends StatelessWidget {
                                   email: authField.email,
                                   mobileNo: authField.mobileNo,
                                   address: authField.address,
-                                  gp: authField.geop,
+                                  gp: authField.geop ?? GeoPoint(0, 0),
                                   isSeller: authField.isSeller));
                           Navigator.pop(context);
                           // authField.reset();

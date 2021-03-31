@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pre_project/Providers/pradeep/UserData.dart';
 import 'package:pre_project/constants/widgets.dart';
-import 'package:pre_project/pages/app_pages/search_page.dart';
 import 'package:pre_project/widgets/myDrawer.dart';
 import 'package:pre_project/constants/Constants.dart';
 import 'package:pre_project/widgets/product_list.dart';
@@ -52,43 +51,23 @@ class Home extends StatelessWidget {
                             width: 60,
                             data: Constants.categoryData,
                             wide: false),
-                        Constants.categoryButton(
+                        Widgets.categoryButton(
                             category: 'Newly Added', context: context),
                         ProductList(type: 'Newly Added'),
-                        Constants.categoryButton(
+                        Widgets.categoryButton(
                             category: 'Vegetables for You', context: context),
                         ProductList(type: 'Vegetables'),
                         // ProductList(),
-                        Constants.categoryButton(
+                        Widgets.categoryButton(
                             category: 'Fruits you may like', context: context),
                         ProductList(type: 'Fruits'),
-                        Constants.categoryButton(
+                        Widgets.categoryButton(
                             category: 'Households', context: context),
                         ProductList(type: 'Household'),
-                        Constants.categoryButton(
+                        Widgets.categoryButton(
                             category: 'You may also like', context: context),
                         ProductList(),
                         SizedBox(height: 10),
-                        // Center(
-                        //   child: TextButton(
-                        //     style: ButtonStyle(
-                        //         shape: MaterialStateProperty.all(
-                        //       RoundedRectangleBorder(
-                        //           borderRadius:
-                        //               BorderRadius.all(Radius.circular(20)),
-                        //           side: BorderSide(
-                        //             color: mainColor,
-                        //           )),
-                        //     )),
-                        //     child: Text(
-                        //       'Load More',
-                        //       style: TextStyle(
-                        //         color: Color(0xFF5600E8),
-                        //       ),
-                        //     ),
-                        //     onPressed: () {},
-                        //   ),
-                        // ),
                         SizedBox(height: 30),
                       ],
                     ),

@@ -21,7 +21,7 @@ class MainHomePage extends StatelessWidget {
               body: tabsWidget(tabData.selectedTab),
               bottomNavigationBar: ConvexAppBar(
                 items: [
-                  TabItem(icon: Icons.favorite, title: 'Favourits'),
+                  TabItem(icon: Icons.location_on, title: 'NearBy'),
                   TabItem(icon: Icons.category, title: 'Category'),
                   TabItem(icon: Icons.home, title: 'Home'),
                   TabItem(icon: Icons.notifications, title: 'Alerts'),

@@ -2,11 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:pre_project/Providers/pradeep/UserData.dart';
-import 'package:pre_project/constants/Constants.dart';
-import 'package:pre_project/firebase/firebase.dart';
+import 'package:pre_project/constants/widgets.dart';
 import 'package:pre_project/pages/app_pages/SeeAll.dart';
 import 'package:pre_project/pages/product_related/gesture_image.dart';
 import 'package:pre_project/pages/product_related/shimmer_product.dart';
+import 'package:pre_project/pages/product_related/widgets/my_bottom_sheet.dart';
 import 'package:pre_project/widgets/error_widget.dart';
 import 'package:pre_project/widgets/product_list.dart';
 import 'package:pre_project/widgets/tags_ui.dart';
@@ -78,58 +78,9 @@ class ProductDetails extends StatelessWidget {
                 ),
               ),
             ),
-            bottomSheet: FractionalTranslation(
-              translation: Offset(0, 0),
-              child: Row(
-                // crossAxisAlignment: CrossAxisAlignment.end,
-                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: TextButton(
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                          Colors.lightGreenAccent,
-                        ),
-                      ),
-                      onPressed: () {
-                        _callAction(data['phones'][0]);
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Text(
-                          'Call Seller',
-                          style: TextStyle(fontSize: 16, color: Colors.black),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: TextButton(
-                      style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                        Colors.yellow,
-                      )),
-                      onPressed: () {
-                        print(data['name']);
-                        // print(_product.vendorGeo.latitude);
-                        _directionAction(
-                          latitude:
-                              data['vendorGeo'].latitude.toString() ?? '80.5',
-                          longitude:
-                              data['vendorGeo'].longitude.toString() ?? '89.7',
-                        );
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Text(
-                          'Directions',
-                          style: TextStyle(fontSize: 16, color: Colors.black),
-                        ),
-                      ),
-                    ),
-                  )
-                ],
-              ),
+            bottomSheet: MyBottomSheet(
+              number: data['phones'][0],
+              gp: data['vendorGeo'],
             ),
             //
             appBar: AppBar(
@@ -437,13 +388,13 @@ class ProductDetails extends StatelessWidget {
                     SizedBox(height: 6),
                     Divider(),
                     SizedBox(height: 6),
-                    Constants.categoryButton(
+                    Widgets.categoryButton(
                         category: 'Related Items', context: context),
                     ProductList(
                       fromDetailPage: true,
                       related: data['category'],
                     ),
-                    Constants.categoryButton(
+                    Widgets.categoryButton(
                         category: 'Also Try', context: context),
                     ProductList(
                       fromDetailPage: true,
@@ -462,39 +413,6 @@ class ProductDetails extends StatelessWidget {
         }
         return ShimmerProduct();
       },
-    );
-  }
-
-  Widget ratingContainer() {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.green,
-        shape: BoxShape.rectangle,
-        borderRadius: BorderRadius.all(
-          Radius.circular(100),
-        ),
-      ),
-      height: 18,
-      width: 37,
-      child: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Text(
-              '4.5',
-              style: TextStyle(
-                fontSize: 11,
-                color: Colors.white,
-              ),
-            ),
-            Icon(
-              Icons.star,
-              size: 12,
-              color: Colors.white,
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

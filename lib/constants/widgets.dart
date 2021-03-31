@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pre_project/constants/Constants.dart';
+import 'package:pre_project/pages/app_pages/SeeAll.dart';
 import 'package:pre_project/widgets/CategoryView.dart';
 
 class Widgets {
@@ -66,4 +68,88 @@ class Widgets {
       ),
     );
   }
+
+  static Widget categoryButton(
+      {@required String category, BuildContext context}) {
+    return TextButton(
+      onPressed: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => SeeAll(
+                      type: category,
+                    )));
+      },
+      style: ButtonStyle(
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(100),
+              bottomRight: Radius.circular(100),
+            ),
+          ),
+        ),
+        overlayColor: MaterialStateProperty.all(Colors.yellowAccent),
+        backgroundColor: MaterialStateProperty.all(Colors.white),
+        padding: MaterialStateProperty.all(EdgeInsets.all(0.0)),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 10,
+              ),
+              child: Text(
+                category,
+                style: TextStyle(
+                  color: Color(0xFF5600E8),
+                ),
+              ),
+            ),
+            Icon(
+              Icons.arrow_forward,
+              color: Color(0xFF5600E8),
+              // color: Colors.green,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // static Widget ratingContainer() {
+  //   return Container(
+  //     decoration: BoxDecoration(
+  //       color: Colors.green,
+  //       shape: BoxShape.rectangle,
+  //       borderRadius: BorderRadius.all(
+  //         Radius.circular(100),
+  //       ),
+  //     ),
+  //     height: 18,
+  //     width: 37,
+  //     child: Center(
+  //       child: Row(
+  //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //         children: [
+  //           Text(
+  //             '4.5',
+  //             style: TextStyle(
+  //               fontSize: 11,
+  //               color: Colors.white,
+  //             ),
+  //           ),
+  //           Icon(
+  //             Icons.star,
+  //             size: 12,
+  //             color: Colors.white,
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 }
