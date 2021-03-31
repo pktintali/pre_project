@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.pre_project">
+    package="com.tdevelopers.dsc_noticeboard">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <!-- io.flutter.app.FlutterApplication is an android.app.Application that
@@ -12,8 +12,8 @@
         android:label="pre_project"
         android:icon="@mipmap/ic_launcher">
 
-        <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyD0E0ZZKq577a4Buiw-06oDDnFoj8eKiL8"/>
+        <!-- <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyD0E0ZZKq577a4Buiw-06oDDnFoj8eKiL8"/> -->
 
         <activity
             android:name=".MainActivity"
